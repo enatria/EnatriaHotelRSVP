@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const mainColors = {
   green1: '#69f0ae',
   green2: '#9fffe0',
