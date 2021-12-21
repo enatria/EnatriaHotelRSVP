@@ -7,7 +7,7 @@ const Splash = ({navigation}) => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.dispatch(StackActions.replace('Coba'));
+      navigation.dispatch(StackActions.replace('HomeScreen'));
     }, 3000);
   }, [navigation]);
 
