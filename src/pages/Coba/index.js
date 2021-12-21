@@ -3,12 +3,12 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Button, AppBar} from '../../components';
 
-const Coba = () => {
+const Coba = ({navigation}) => {
   return (
     <View>
-      <AppBar />
+      <AppBar label={'Coba'} />
       <Text style={styles.title}>Hai</Text>
-      <Button title="button" />
+      <Button title="button" onPress={() => navigation.navigate('Home') } />
     </View>
   );
 };

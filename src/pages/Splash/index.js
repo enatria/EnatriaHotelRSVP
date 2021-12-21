@@ -1,9 +1,18 @@
-import React from 'react';
+/* eslint-disable prettier/prettier */
+import { StackActions } from '@react-navigation/native';
+import React, { useEffect } from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../utils';
-const Splash = () => {
+const Splash = ({navigation}) => {
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.dispatch(StackActions.replace('Coba'));
+    }, 3000);
+  }, [navigation]);
+
   return (
-    <View>
+    <View style={styles.page}>
       <Text style={styles.title}>enatria.</Text>
     </View>
   );
@@ -16,11 +25,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colors.primary,
   },
   title: {
     fontSize: 30,
-    fontWeight: 700,
+    fontWeight: '700',
     fontFamily: 'Poppins-Bold',
-    backgroundColor: colors.primary,
   },
 });
