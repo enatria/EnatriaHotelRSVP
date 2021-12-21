@@ -5,6 +5,7 @@ import {Splash, Home, Favourites, Profile, Settings} from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconNavBar from '../components/atoms/IconNavBar';
 import { icons } from '../assets';
+import { colors } from '../utils';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,27 +28,37 @@ const Router = () => {
 };
 
 export const NavBar = () => {
+
+  const optionBar = (icon) => {
+    return {
+      headerShown: false,
+      tabBarIcon: props => <IconNavBar data={props} image={icon} />,
+      tabBarLabelStyle: {color: colors.primary, marginBottom: 10},
+      tabBarStyle: {height: 60},
+    };
+  };
+
   return (
     <Tab.Navigator>
       <Tab.Screen
         name="Search"
         component={Home}
-        options={{headerShown: false}}
+        options={optionBar(icons.SEARCH)}
       />
       <Tab.Screen
         name="Favourites"
         component={Favourites}
-        options={{headerShown: false}}
+        options={optionBar(icons.HEART)}
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={{headerShown: false}}
+        options={optionBar(icons.USER)}
       />
       <Tab.Screen
         name="Settings"
         component={Settings}
-        options={{headerShown: false}}
+        options={optionBar(icons.SETTINGS)}
       />
     </Tab.Navigator>
   );
