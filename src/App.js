@@ -1,24 +1,13 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Button} from './components';
-import { AppBar } from './components/molecules';
+import {NavigationContainer} from '@react-navigation/native';
+import Router from './router';
 
 const App = () => {
   return (
-    <View>
-      <AppBar />
-      <Text style={styles.title}>Hai</Text>
-      <Button title="button" />
-    </View>
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 25,
-    fontFamily: 'Poppins-SemiBold',
-  },
-});
 
 export default App;
