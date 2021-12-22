@@ -1,15 +1,66 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {Text, View} from 'react-native';
-import {AppBar} from '../../components';
+import {ImageBackground, Text, View, StyleSheet} from 'react-native';
+import {AppBar, Gap} from '../../components';
+import {Rating} from 'react-native-ratings';
+import {colors} from '../../utils';
+
+const image = {
+  uri: 'https://reactjs.org/logo-og.png',
+};
 
 const DetailHotel = () => {
   return (
-    <View>
-      <AppBar label={'Hotel Detail'} bg="transparent" />
-      <Text>Ini Detail Hotel</Text>
+    <View style={styles.container}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+        <AppBar label={'Hotel Detail'} bg="transparent" />
+        <Gap height={90} />
+        <View style={styles.content}>
+          <Text style={styles.title}>Rose Garden Hotel</Text>
+          <View style={styles.subContent}>
+            <View>
+              <Text style={styles.location}>San, Bruno</Text>
+            </View>
+            <View>
+              <Text>$250</Text>
+            </View>
+          </View>
+        </View>
+      </ImageBackground>
     </View>
   );
 };
 
 export default DetailHotel;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  image: {
+    justifyContent: 'center',
+  },
+  content: {
+    paddingLeft: 20,
+    paddingBottom: 20,
+  },
+  title: {
+    color: 'white',
+    fontSize: 36,
+    lineHeight: 70,
+    fontFamily: 'Poppins-SemiBold',
+    fontWeight: 'bold',
+  },
+  subContent: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  location: {
+    color: colors.text.info,
+    fontFamily: 'Poppins-Regular',
+    fontSize: 20,
+  },
+  rating: {
+    backgroundColor: 'transparent',
+  },
+});

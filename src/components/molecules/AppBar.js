@@ -8,7 +8,7 @@ const AppBar = ({label, bg}) => {
     <>
       <StatusBar
         animated={true}
-        backgroundColor={bg === 'transparent' ? 'transparent' : colors.primary}
+        backgroundColor={bg === 'transparent' ? 'black' : colors.primary}
       />
       <View style={styles.appBar(bg)}>
         <Text style={styles.text(bg)}>{label}</Text>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }),
   text: bg => ({
-    color: bg === 'transparent' ? 'black' : colors.white,
+    color: bg === 'transparent' ? colors.light : colors.white,
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,
   }),
