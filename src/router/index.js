@@ -1,11 +1,18 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Splash, Home, Favourites, Profile, Settings} from '../pages';
+import {
+  Splash,
+  Home,
+  Favourites,
+  Profile,
+  Settings,
+  DetailHotel,
+} from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconNavBar from '../components/atoms/IconNavBar';
-import { icons } from '../assets';
-import { colors } from '../utils';
+import {icons} from '../assets';
+import {colors} from '../utils';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,13 +30,17 @@ const Router = () => {
         component={NavBar}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="Details"
+        component={DetailHotel}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };
 
 export const NavBar = () => {
-
-  const optionBar = (icon) => {
+  const optionBar = icon => {
     return {
       headerShown: false,
       tabBarIcon: props => <IconNavBar data={props} image={icon} />,

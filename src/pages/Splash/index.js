@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { StackActions } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import {StackActions} from '@react-navigation/native';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../utils';
 const Splash = ({navigation}) => {
-
   useEffect(() => {
     setTimeout(() => {
       navigation.dispatch(StackActions.replace('HomeScreen'));
@@ -28,8 +27,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   title: {
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: '700',
-    fontFamily: 'Poppins-Bold',
+    fontFamily: 'Poppins-SemiBold',
+    color: colors.white,
   },
 });

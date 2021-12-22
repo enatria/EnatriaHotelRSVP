@@ -5,5 +5,6 @@ import Home from './Home';
 import Profile from './Profile';
 import Settings from './Settings';
 import Favourites from './Favourites';
+import DetailHotel from './DetailHotel';
 
-export {Splash, Coba, Home, Profile, Settings, Favourites};
+export {Splash, Coba, Home, Profile, Settings, Favourites, DetailHotel};
