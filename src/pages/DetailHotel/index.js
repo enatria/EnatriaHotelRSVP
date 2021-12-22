@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {ImageBackground, Text, View, StyleSheet} from 'react-native';
-import {AppBar, Gap} from '../../components';
+import {AppBar, Gap, Avatar} from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../utils';
 
@@ -20,6 +20,17 @@ const DetailHotel = () => {
           <View style={styles.subContent}>
             <View>
               <Text style={styles.location}>San, Bruno</Text>
+
+              <Rating
+                type="custom"
+                fractions={1}
+                startingValue={3.6}
+                readonly
+                imageSize={20}
+                tintColor="black"
+                // onFinishRating={ratingCompleted}
+                style={styles.rating}
+              />
             </View>
             <View>
               <Text>$250</Text>
@@ -27,6 +38,7 @@ const DetailHotel = () => {
           </View>
         </View>
       </ImageBackground>
+      <Avatar source={image} width={20} height={20} />
     </View>
   );
 };
@@ -51,8 +63,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   subContent: {
-    flex: 1,
-    flexDirection: 'column',
+    display: 'flex',
     justifyContent: 'space-between',
   },
   location: {
