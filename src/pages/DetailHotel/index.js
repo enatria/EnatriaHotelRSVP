@@ -41,7 +41,7 @@ const DetailHotel = () => {
       </ImageBackground>
       <View>
         <View style={{padding: 20}}>
-          <SubTitle title="Overview" />
+          <SubTitle title="Overview" iya />
           <Text style={styles.overview}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
             suscipit unde beatae, praesentium tenetur eaque, sint accusantium

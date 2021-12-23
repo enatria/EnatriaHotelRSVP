@@ -1,3 +1,4 @@
 import Profile from './Profile';
+import SlideTopDestination from './SlideTopDestination';
 
-export {Profile};
+export {SlideTopDestination, Profile};
