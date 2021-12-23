@@ -8,6 +8,7 @@ import {
   Profile,
   Settings,
   DetailHotel,
+  BookingHistory,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconNavBar from '../components/atoms/IconNavBar';

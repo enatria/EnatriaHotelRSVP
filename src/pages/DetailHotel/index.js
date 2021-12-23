@@ -15,9 +15,9 @@ const DetailHotel = () => {
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <AppBar label={'Hotel Detail'} bg="transparent" />
         <Gap height={90} />
-        <View style={styles.SubTitle}>
+        <View style={styles.content}>
           <Text style={styles.title}>Rose Garden Hotel</Text>
-          <View style={styles.subSubTitle}>
+          <View style={styles.subContent}>
             <View>
               <Text style={styles.location}>San, Bruno</Text>
 
@@ -39,8 +39,8 @@ const DetailHotel = () => {
           </View>
         </View>
       </ImageBackground>
-      <View style={{padding: 20}}>
-        <View>
+      <View>
+        <View style={{padding: 20}}>
           <SubTitle title="Overview" />
           <Text style={styles.overview}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
@@ -59,12 +59,11 @@ export default DetailHotel;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   image: {
-    justifySubTitle: 'center',
+    justifyContent: 'center',
   },
-  SubTitle: {
+  content: {
     paddingLeft: 20,
     paddingBottom: 20,
   },
@@ -75,9 +74,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontWeight: 'bold',
   },
-  subSubTitle: {
+  subContent: {
     flexDirection: 'row',
-    justifySubTitle: 'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   location: {
@@ -101,10 +100,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   overview: {
-    fontSize: 13,
-    fontFamily: 'Poppins-Regular',
-    letterSpacing: 1,
-    textAlign: 'justify',
+    fontSize: 14,
     lineHeight: 20,
+    fontFamily: 'Poppins-Regular',
+    textAlign: 'justify',
+    letterSpacing: 1,
   },
 });
