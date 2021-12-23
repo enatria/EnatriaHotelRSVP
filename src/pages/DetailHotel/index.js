@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {ImageBackground, Text, View, StyleSheet} from 'react-native';
-import {AppBar, Gap, Avatar, CardReview} from '../../components';
+import {AppBar, Gap, Avatar, CardReview, SubTitle} from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../utils';
 
@@ -15,9 +15,9 @@ const DetailHotel = () => {
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <AppBar label={'Hotel Detail'} bg="transparent" />
         <Gap height={90} />
-        <View style={styles.content}>
+        <View style={styles.SubTitle}>
           <Text style={styles.title}>Rose Garden Hotel</Text>
-          <View style={styles.subContent}>
+          <View style={styles.subSubTitle}>
             <View>
               <Text style={styles.location}>San, Bruno</Text>
 
@@ -39,6 +39,17 @@ const DetailHotel = () => {
           </View>
         </View>
       </ImageBackground>
+      <View style={{padding: 20}}>
+        <View>
+          <SubTitle title="Overview" />
+          <Text style={styles.overview}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            suscipit unde beatae, praesentium tenetur eaque, sint accusantium
+            impedit expedita necessitatibus quos minus nisi voluptatibus dicta
+            repellendus ea voluptatum sunt nihil!
+          </Text>
+        </View>
+      </View>
       <CardReview />
     </View>
   );
@@ -48,11 +59,12 @@ export default DetailHotel;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white,
   },
   image: {
-    justifyContent: 'center',
+    justifySubTitle: 'center',
   },
-  content: {
+  SubTitle: {
     paddingLeft: 20,
     paddingBottom: 20,
   },
@@ -63,9 +75,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontWeight: 'bold',
   },
-  subContent: {
+  subSubTitle: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifySubTitle: 'space-between',
     alignItems: 'center',
   },
   location: {
@@ -87,5 +99,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'Poppins-SemiBold',
     alignSelf: 'center',
+  },
+  overview: {
+    fontSize: 13,
+    fontFamily: 'Poppins-Regular',
+    letterSpacing: 1,
+    textAlign: 'justify',
+    lineHeight: 20,
   },
 });

@@ -3,7 +3,6 @@ import React from 'react';
 import {StatusBar, Text, View, StyleSheet} from 'react-native';
 import {colors} from '../../utils';
 
-
 const AppBar = ({label, bg}) => {
   return (
     <>
@@ -37,12 +36,12 @@ const styles = StyleSheet.create({
       height: 1,
     },
     shadowOpacity: 0.25,
-      shadowRadius: 3.00,
+    shadowRadius: 3.0,
 
-      elevation: 5,
+    elevation: 5,
   }),
   text: bg => ({
-    color: bg === 'transparent' ? colors.light : colors.white,
+    color: bg === 'transparent' ? colors.white : colors.white,
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,
   }),

@@ -45,14 +45,11 @@ const styles = StyleSheet.create({
     margin: 15,
     border: 10,
     padding: 15,
-    borderRadius: 15,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.1,
+    borderRadius: 10,
+    shadowColor: '#0001',
+    shadowOpacity: 1,
     shadowRadius: 0,
+    elevation: 4,
   },
   title: {
     flexDirection: 'row',
