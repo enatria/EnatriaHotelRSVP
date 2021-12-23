@@ -13,11 +13,16 @@ const styles = StyleSheet.create({
   mt10 : {
     marginTop: 10,
   },
+  margin: {
+    marginTop: 12,
+    marginHorizontal: 12,
+  },
 });
 
 const SearchCard = () => {
   return (
-    <CardBox>
+    <SafeAreaView style={styles.margin}>
+      <CardBox shadow>
         <InputFields placeHolder={'Where do you want to go?'} />
         <SafeAreaView style={styles.row}>
           <View style={styles.col05}>
@@ -32,6 +37,7 @@ const SearchCard = () => {
           <Button title={'Search'} />
         </SafeAreaView>
       </CardBox>
+    </SafeAreaView>
   );
 };
 
