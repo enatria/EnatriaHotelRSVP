@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {ImageBackground, Text, View, StyleSheet} from 'react-native';
-import {AppBar, Gap, Avatar} from '../../components';
+import {AppBar, Gap, Avatar, CardReview} from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../utils';
 
@@ -38,7 +38,7 @@ const DetailHotel = () => {
           </View>
         </View>
       </ImageBackground>
-      <Avatar source={image} width={20} height={20} />
+      <CardReview />
     </View>
   );
 };
