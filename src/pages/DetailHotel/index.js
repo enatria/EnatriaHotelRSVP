@@ -21,19 +21,20 @@ const DetailHotel = () => {
             <View>
               <Text style={styles.location}>San, Bruno</Text>
 
-              <Rating
-                type="custom"
-                fractions={1}
-                startingValue={3.6}
-                readonly
-                imageSize={20}
-                tintColor="black"
-                // onFinishRating={ratingCompleted}
-                style={styles.rating}
-              />
+              <View style={styles.rating}>
+                <Rating
+                  type="custom"
+                  fractions={1}
+                  startingValue={3.6}
+                  readonly
+                  imageSize={15}
+                  tintColor="black"
+                  // onFinishRating={ratingCompleted}
+                />
+              </View>
             </View>
-            <View>
-              <Text>$250</Text>
+            <View style={styles.price}>
+              <Text style={styles.textPrice}>$250</Text>
             </View>
           </View>
         </View>
@@ -63,8 +64,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   subContent: {
-    display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   location: {
     color: colors.text.info,
@@ -73,5 +75,17 @@ const styles = StyleSheet.create({
   },
   rating: {
     backgroundColor: 'transparent',
+    alignSelf: 'flex-start',
+  },
+  price: {
+    padding: 9,
+    backgroundColor: colors.primary,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+  },
+  textPrice: {
+    fontSize: 15,
+    fontFamily: 'Poppins-SemiBold',
+    alignSelf: 'center',
   },
 });
