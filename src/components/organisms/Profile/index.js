@@ -20,11 +20,11 @@ const Profile = () => {
           <Text style={styles.num}>20</Text>
         </View>
         <View>
-          <Text style={styles.title}>Bookings</Text>
+          <Text style={styles.title}>Reviews</Text>
           <Text style={styles.num}>20</Text>
         </View>
         <View>
-          <Text style={styles.title}>Bookings</Text>
+          <Text style={styles.title}>Favorites</Text>
           <Text style={styles.num}>20</Text>
         </View>
       </View>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   userSocial: {
     textAlign: 'center',
     fontSize: 13,
-    color: colors.secndary,
+    color: colors.secondary,
     fontFamily: 'Poppins-Medium',
   },
 

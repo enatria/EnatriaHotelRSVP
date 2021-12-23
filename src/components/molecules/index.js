@@ -2,4 +2,6 @@
 import AppBar from './AppBar';
 import SearchCard from './SearchCard';
 import CardReview from './CardReview';
-export {AppBar, SearchCard, CardReview};
+import CardBookHistory from './CardBookHistory';
+
+export {AppBar, SearchCard, CardReview, CardBookHistory};

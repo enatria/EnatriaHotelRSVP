@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {Profile as Profil, AppBar} from '../../components';
+import {Profile as Profil, AppBar, CardBookHistory} from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../utils';
 
@@ -11,6 +11,7 @@ const Profile = () => {
       <AppBar label="Profile" />
       <View style={styles.container}>
         <Profil />
+        <CardBookHistory/>
       </View>
     </>
   );
