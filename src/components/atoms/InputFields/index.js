@@ -46,7 +46,7 @@ const InputFields = ({inlineIcon, placeHolder, number}) => {
 };
 
 InputFields.defaultProps = {
-  inlineIcon: 'ic_baseline',
+  // inlineIcon: 'ic_baseline',
   placeHolder: 'Placeholder',
 };
 

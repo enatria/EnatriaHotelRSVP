@@ -3,14 +3,14 @@ import React from 'react';
 import {StatusBar, Text, View, StyleSheet} from 'react-native';
 import {colors} from '../../utils';
 
-const AppBar = ({label, bg}) => {
+const AppBar = ({label, bg, noshadow}) => {
   return (
     <>
       <StatusBar
         animated={true}
         backgroundColor={bg === 'transparent' ? 'black' : colors.primary}
       />
-      <View style={styles.appBar(bg)}>
+      <View style={noshadow ? styles.appBar(bg) : [styles.appBar(bg), styles.shadow]}>
         <Text style={styles.text(bg)}>{label}</Text>
       </View>
     </>
@@ -22,6 +22,7 @@ AppBar.defaultProps = {
 };
 
 export default AppBar;
+
 const styles = StyleSheet.create({
   appBar: bg => ({
     height: 60,
@@ -30,6 +31,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 999999,
+  }),
+  text: bg => ({
+    color: bg === 'transparent' ? colors.white : colors.white,
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 16,
+  }),
+  shadow: {
     shadowColor: colors.primary,
     shadowOffset: {
       width: 0,
@@ -39,10 +47,5 @@ const styles = StyleSheet.create({
     shadowRadius: 3.0,
 
     elevation: 5,
-  }),
-  text: bg => ({
-    color: bg === 'transparent' ? colors.white : colors.white,
-    fontFamily: 'Poppins-SemiBold',
-    fontSize: 16,
-  }),
+  },
 });

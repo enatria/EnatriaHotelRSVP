@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {AppBar, Gap, HotelSearchResult, SearchCard, SlideTopDestination} from '../../components';
+import {AppBar, Button, Gap, HotelSearchResult, SearchCard, SlideTopDestination} from '../../components';
 
 const Home = ({navigation}) => {
   const [search, setSearch] = useState(undefined);
@@ -29,6 +29,7 @@ const Home = ({navigation}) => {
   return (
     <View>
       <AppBar label={label} />
+      <Button title={'signin'} onPress={() => navigation.navigate('SignIn')} />
       <SafeAreaView>
         <SearchCard navigation={navigation} action={{setSearch, setLabel}} />
       </SafeAreaView>

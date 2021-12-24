@@ -10,6 +10,7 @@ import {
   DetailHotel,
   BookingHistory,
   SearchResult,
+  SignIn,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconNavBar from '../components/atoms/IconNavBar';
@@ -35,6 +36,11 @@ const Router = () => {
       <Stack.Screen
         name="Details"
         component={DetailHotel}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
