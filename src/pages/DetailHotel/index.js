@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import {
   AppBar,
@@ -13,6 +14,7 @@ import {
   ListRoomTypes,
   CardReview,
   SubTitle,
+  CardAmenities,
 } from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../utils';
@@ -26,7 +28,7 @@ const DetailHotel = () => {
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <AppBar label={'Hotel Detail'} bg="transparent" />
-        <Gap height={90} />
+        <Gap height={70} />
         <View style={styles.content}>
           <Text style={styles.title}>Rose Garden Hotel</Text>
           <View style={styles.subContent}>
@@ -51,25 +53,32 @@ const DetailHotel = () => {
           </View>
         </View>
       </ImageBackground>
-      <View>
-        <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
-          <SubTitle title="Overview" iya />
-          <Text style={styles.overview}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-            suscipit unde beatae, praesentium tenetur eaque, sint accusantium
-            impedit expedita necessitatibus quos minus nisi voluptatibus dicta
-            repellendus ea voluptatum sunt nihil!
-          </Text>
+      <ScrollView>
+        <View>
+          <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
+            <SubTitle title="Overview" iya />
+            <Text style={styles.overview}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Recusandae suscipit unde beatae, praesentium tenetur eaque, sint
+              accusantium impedit expedita necessitatibus quos minus nisi
+              voluptatibus dicta repellendus ea voluptatum sunt nihil!
+            </Text>
+          </View>
+          <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
+            <SubTitle title="Amenities" />
+            <CardAmenities />
+            <CardAmenities />
+          </View>
+          <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
+            <SubTitle title="Room Types" />
+            <ListRoomTypes />
+          </View>
         </View>
-        <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
-          <SubTitle title="Room Types" />
-          <ListRoomTypes />
+        <View style={styles.review}>
+          <SubTitle title="Review" />
+          <CardReview />
         </View>
-      </View>
-      <View style={styles.review}>
-        <SubTitle title="Review" />
-        <CardReview />
-      </View>
+      </ScrollView>
     </View>
   );
 };

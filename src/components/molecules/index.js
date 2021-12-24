@@ -4,5 +4,13 @@ import SearchCard from './SearchCard';
 import CardReview from './CardReview';
 import CardBookHistory from './CardBookHistory';
 import TopDestination from './TopDestination';
+import CardAmenities from './CardAmenities';
 
-export {AppBar, SearchCard, CardReview, CardBookHistory, TopDestination};
+export {
+  AppBar,
+  SearchCard,
+  CardReview,
+  CardBookHistory,
+  TopDestination,
+  CardAmenities,
+};
