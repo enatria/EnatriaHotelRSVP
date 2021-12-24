@@ -1,7 +1,19 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {ImageBackground, Text, View, StyleSheet} from 'react-native';
-import {AppBar, Gap, Avatar, CardReview, SubTitle} from '../../components';
+import {
+  ImageBackground,
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
+import {
+  AppBar,
+  Gap,
+  ListRoomTypes,
+  CardReview,
+  SubTitle,
+} from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../utils';
 
@@ -40,7 +52,7 @@ const DetailHotel = () => {
         </View>
       </ImageBackground>
       <View>
-        <View style={{padding: 20}}>
+        <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
           <SubTitle title="Overview" iya />
           <Text style={styles.overview}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
@@ -49,8 +61,15 @@ const DetailHotel = () => {
             repellendus ea voluptatum sunt nihil!
           </Text>
         </View>
+        <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
+          <SubTitle title="Room Types" />
+          <ListRoomTypes />
+        </View>
       </View>
-      <CardReview />
+      <View style={styles.review}>
+        <SubTitle title="Review" />
+        <CardReview />
+      </View>
     </View>
   );
 };
@@ -105,5 +124,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     textAlign: 'justify',
     letterSpacing: 1,
+  },
+  review: {
+    paddingHorizontal: 20,
+    marginTop: 10,
   },
 });

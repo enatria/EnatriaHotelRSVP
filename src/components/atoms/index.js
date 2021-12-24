@@ -5,5 +5,15 @@ import Avatar from './Avatar';
 import InputFields, {InputDatePicker} from './InputFields';
 import CardBox from './CardBox';
 import SubTitle from './SubTitle';
+import Badge from './Badge';
 
-export {Button, Gap, InputFields, InputDatePicker, CardBox, Avatar, SubTitle};
+export {
+  Button,
+  Gap,
+  InputFields,
+  InputDatePicker,
+  CardBox,
+  Avatar,
+  SubTitle,
+  Badge,
+};

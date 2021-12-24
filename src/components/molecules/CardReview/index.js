@@ -42,7 +42,6 @@ export default CardReview;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    margin: 15,
     border: 10,
     padding: 15,
     borderRadius: 10,
