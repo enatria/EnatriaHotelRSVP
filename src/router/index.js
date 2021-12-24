@@ -9,6 +9,7 @@ import {
   Settings,
   DetailHotel,
   BookingHistory,
+  SearchResult,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconNavBar from '../components/atoms/IconNavBar';
@@ -47,6 +48,7 @@ export const NavBar = () => {
       tabBarIcon: props => <IconNavBar data={props} image={icon} />,
       tabBarLabelStyle: {color: colors.primary, marginBottom: 10},
       tabBarStyle: {height: 60},
+      tabBarHideOnKeyboard: true,
     };
   };
 

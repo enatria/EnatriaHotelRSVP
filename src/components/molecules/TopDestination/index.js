@@ -12,7 +12,7 @@ const TopDestination = ({slide}) => {
 
   return (
     <SafeAreaView style={slide ? styles.slide : ''}>
-      <CardBox center width={100} height={100}>
+      <CardBox center width={100} height={50}>
         <Text>Jakarta</Text>
       </CardBox>
     </SafeAreaView>

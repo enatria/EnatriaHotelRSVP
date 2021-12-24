@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const SearchCard = () => {
+const SearchCard = ({navigation, action}) => {
   return (
     <SafeAreaView style={styles.margin}>
       <CardBox shadow padding>
@@ -34,7 +34,10 @@ const SearchCard = () => {
         </SafeAreaView>
         <InputFields placeHolder={'Guest'} number />
         <SafeAreaView style={styles.mt10}>
-          <Button title={'Search'} />
+          <Button title="Search" onPress={() => {
+            action.setSearch(1);
+            action.setLabel('Search Result');
+          }} />
         </SafeAreaView>
       </CardBox>
     </SafeAreaView>
