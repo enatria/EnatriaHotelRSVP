@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 const SearchCard = () => {
   return (
     <SafeAreaView style={styles.margin}>
-      <CardBox shadow>
+      <CardBox shadow padding>
         <InputFields placeHolder={'Where do you want to go?'} />
         <SafeAreaView style={styles.row}>
           <View style={styles.col05}>
