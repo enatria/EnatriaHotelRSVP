@@ -1,14 +1,16 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { Text, View } from 'react-native';
-import { AppBar } from '../../components';
+import {Text, ScrollView} from 'react-native';
+import {AppBar, HotelWishlist} from '../../components';
 
-const Favourites = () => {
+const Favourites = ({navigation}) => {
   return (
-    <View>
+    <ScrollView>
       <AppBar label={'Favourites'} />
-      <Text>Ini Favourites</Text>
-    </View>
+      <ScrollView>
+        <HotelWishlist navigation={navigation} />
+      </ScrollView>
+    </ScrollView>
   );
 };
 

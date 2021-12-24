@@ -13,9 +13,9 @@ const CardReview = () => {
           <Rating
             type="custom"
             fractions={1}
-            startingValue={3.6}
+            startingValue={5}
             readonly
-            imageSize={15}
+            imageSize={12}
             tintColor="white"
             ratingBackgroundColor="#c8c7c8"
             // onFinishRating={ratingCompleted}}
