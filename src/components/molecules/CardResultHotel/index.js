@@ -1,5 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Rating} from 'react-native-ratings';
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 });
 
 const image = {
-  uri: 'https://reactjs.org/logo-og.png',
+  uri: 'https://exp.cdn-hotels.com/hotels/1000000/530000/523700/523615/fc6a3e32_z.jpg',
 };
 
 const CardResultHotel = ({name, rating, address, price}) => {

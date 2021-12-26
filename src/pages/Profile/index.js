@@ -8,7 +8,7 @@ import {colors} from '../../utils';
 const Profile = () => {
   return (
     <>
-      <AppBar label="Profile" />
+      <AppBar backArrow label="Profile" />
       <View style={styles.container}>
         <Profil />
         <CardBookHistory/>

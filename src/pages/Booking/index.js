@@ -3,13 +3,13 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { AppBar } from '../../components';
 
-const Settings = () => {
+const Booking = () => {
   return (
     <View>
-      <AppBar backArrow label={'Settings'} />
-      <Text>Ini Settings</Text>
+      <AppBar backArrow label={'Book Now'} />
+      <Text>Ini Booking</Text>
     </View>
   );
 };
 
-export default Settings;
+export default Booking;
