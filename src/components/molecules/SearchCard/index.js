@@ -23,7 +23,7 @@ const SearchCard = ({navigation, action}) => {
   return (
     <SafeAreaView style={styles.margin}>
       <CardBox shadow padding>
-        <InputFields placeHolder={'Where do you want to go?'} />
+        <InputFields placeHolder={'Where do you want to go?'} inlineIcon={'ic_magnifying_glass'} />
         <SafeAreaView style={styles.row}>
           <View style={styles.col05}>
             <InputDatePicker placeHolder={'Check-in Date'} />
@@ -32,7 +32,7 @@ const SearchCard = ({navigation, action}) => {
             <InputDatePicker placeHolder={'Check-out Date'} />
           </View>
         </SafeAreaView>
-        <InputFields placeHolder={'Guest'} number />
+        <InputFields placeHolder={'Guest'} number inlineIcon={'ic_avatar'} />
         <SafeAreaView style={styles.mt10}>
           <Button title="Search" onPress={() => {
             action.setSearch(1);

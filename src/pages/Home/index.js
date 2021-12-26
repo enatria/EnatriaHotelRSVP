@@ -23,7 +23,7 @@ const Home = ({navigation}) => {
       fontFamily: 'Poppins-Regular',
       fontSize: 14,
       fontWeight: 'bold',
-    }
+    },
   });
 
   return (

@@ -9,6 +9,7 @@ const SEARCH = require('./icon/magnifying-glass.png');
 const PLACE = require('./icon/placeholder.png');
 const SETTINGS = require('./icon/settings.png');
 const STAR = require('./icon/star.png');
+const LOCK = require('./icon/padlock.png');
 
 
 export const icons = {
@@ -22,4 +23,5 @@ export const icons = {
   PLACE,
   SETTINGS,
   STAR,
+  LOCK,
 };

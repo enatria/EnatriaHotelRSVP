@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const InputFields = ({inlineIcon, placeHolder, number}) => {
+const InputFields = ({inlineIcon, placeHolder, number, password}) => {
 
   return (
     <SafeAreaView>
@@ -36,6 +36,13 @@ const InputFields = ({inlineIcon, placeHolder, number}) => {
         placeholder={placeHolder}
         inlineImagePadding={5}
         keyboardType="number-pad"/>
+      : password ?
+      <TextInput
+        style={styles.input}
+        inlineImageLeft={inlineIcon}
+        placeholder={placeHolder}
+        inlineImagePadding={5}
+        secureTextEntry/>
       : <TextInput
         style={styles.input}
         inlineImageLeft={inlineIcon}
@@ -64,7 +71,7 @@ export const InputDatePicker = ({placeHolder}) => {
         setOpen(true);
       }}
       style={[styles.input, {fontSize: 14}]}
-      inlineImageLeft="ic_baseline"
+      inlineImageLeft="ic_calendar"
       inlineImagePadding={5}
       value={value}
       placeholder={placeHolder}

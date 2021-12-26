@@ -29,11 +29,11 @@ const SignIn = () => {
           <SafeAreaView style={styles.widthInput}>
             <Text style={[styles.alignCenter, styles.title]}>Sign in to enatria.</Text>
             <View style={styles.mt12}>
-              <InputFields />
+              <InputFields inlineIcon={'ic_avatar'} placeHolder={'Username'} />
             </View>
 
             <View style={styles.mt12}>
-              <InputFields />
+              <InputFields inlineIcon={'ic_padlock'} password placeHolder={'Password'} />
             </View>
 
             <View style={styles.mt12}>
