@@ -24,6 +24,7 @@ const HotelSearchResult = ({navigation}) => {
       address: `${exampleApiResponse.address.streetAddress}, ${exampleApiResponse.address.locality}`,
       starRating: 5,
       price: exampleApiResponse.ratePlan.price.current,
+      isFavourite: true,
     },
     {
       id: '676614',
@@ -31,6 +32,7 @@ const HotelSearchResult = ({navigation}) => {
       address: `${exampleApiResponse.address.streetAddress}, ${exampleApiResponse.address.locality}`,
       starRating: 3.5,
       price: exampleApiResponse.ratePlan.price.current,
+      isFavourite: false,
     },
     {
       id: '676615',
@@ -38,6 +40,7 @@ const HotelSearchResult = ({navigation}) => {
       address: `${exampleApiResponse.address.streetAddress}, ${exampleApiResponse.address.locality}`,
       starRating: 3.6,
       price: exampleApiResponse.ratePlan.price.current,
+      isFavourite: false,
     },
   ];
 
@@ -50,6 +53,7 @@ const HotelSearchResult = ({navigation}) => {
           address={item.address}
           price={item.price}
           navigation={navigation}
+          isFavourites={item.isFavourite}
         />
       </Pressable>
     );

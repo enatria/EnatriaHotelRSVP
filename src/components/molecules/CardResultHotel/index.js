@@ -35,14 +35,14 @@ const image = {
   uri: 'https://exp.cdn-hotels.com/hotels/1000000/530000/523700/523615/fc6a3e32_z.jpg',
 };
 
-const CardResultHotel = ({name, rating, address, price}) => {
+const CardResultHotel = ({name, rating, address, price, isFavourites}) => {
   return (
     <SafeAreaView style={styles.container}>
       <CardBox shadow>
         <Image source={image} style={styles.hotelImg} />
         <View style={{flexDirection: 'row-reverse'}}>
           <TouchableOpacity style={styles.favBtn}>
-            <Image source={icons.HEART} style={{width: 20, height: 20}} />
+            <Image source={isFavourites ? icons.HEART_RED : icons.HEART} style={{width: 20, height: 20}} />
           </TouchableOpacity>
         </View>
         <View style={styles.detailBar}>

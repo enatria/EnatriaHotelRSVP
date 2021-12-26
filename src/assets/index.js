@@ -4,6 +4,7 @@ const BACK_ARROW = require('./icon/previous.png');
 const CALENDAR = require('./icon/calendar.png');
 const FILTER = require('./icon/filter.png');
 const HEART = require('./icon/heart.png');
+const HEART_RED = require('./icon/heart_red.png');
 const HOUSE = require('./icon/house.png');
 const SEARCH = require('./icon/magnifying-glass.png');
 const PLACE = require('./icon/placeholder.png');
@@ -18,6 +19,7 @@ export const icons = {
   CALENDAR,
   FILTER,
   HEART,
+  HEART_RED,
   HOUSE,
   SEARCH,
   PLACE,
