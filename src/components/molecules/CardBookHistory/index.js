@@ -20,7 +20,7 @@ const CardBookHistory = () => {
           <Rating
             type="custom"
             fractions={1}
-            startingValue={3.6}
+            startingValue={5}
             readonly
             imageSize={12}
             tintColor="white"

@@ -4,7 +4,7 @@ import {FlatList, Pressable} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {CardResultHotel} from '../..';
 
-const HotelSearchResult = ({navigation}) => {
+const HotelWishlist = ({navigation}) => {
   const exampleApiResponse = {
     address: {
       streetAddress: 'Sadovnicheskaya 20 str. 1',
@@ -66,4 +66,4 @@ const HotelSearchResult = ({navigation}) => {
   );
 };
 
-export default HotelSearchResult;
+export default HotelWishlist;

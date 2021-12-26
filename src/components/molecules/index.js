@@ -4,8 +4,8 @@ import SearchCard from './SearchCard';
 import CardReview from './CardReview';
 import CardBookHistory from './CardBookHistory';
 import TopDestination from './TopDestination';
-import CardResultHotel from './CardResultHotel';
 import CardAmenities from './CardAmenities';
+import CardResultHotel from './CardResultHotel';
 
 export {
   AppBar,

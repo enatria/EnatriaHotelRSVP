@@ -15,6 +15,7 @@ import {
   CardReview,
   SubTitle,
   CardAmenities,
+  Button,
 } from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../utils';
@@ -79,6 +80,9 @@ const DetailHotel = () => {
           <CardReview />
         </View>
       </ScrollView>
+      <View style={{marginHorizontal: 20}}>
+        <Button title="Book Hotel" />
+      </View>
     </View>
   );
 };
