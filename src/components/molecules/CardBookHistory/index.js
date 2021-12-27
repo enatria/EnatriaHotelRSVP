@@ -8,29 +8,30 @@ import {colors} from '../../../utils';
 const CardBookHistory = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.image}>
-        <Image source={ava} style={styles.image} />
-      </View>
+      <View style={styles.content}>
+        <View style={styles.info}>
+          <View style={styles.image}>
+            <Image source={ava} style={styles.image} />
+          </View>
 
-      <View style={styles.summary}>
-        <Text style={styles.hotel}>Garden Hotel</Text>
-        <Text style={styles.location}>San, Bruno</Text>
+          <View style={styles.summary}>
+            <Text style={styles.hotel}>Garden Hotel</Text>
+            <Text style={styles.location}>San, Bruno</Text>
 
-        <View style={styles.rating}>
-          <Rating
-            type="custom"
-            fractions={1}
-            startingValue={5}
-            readonly
-            imageSize={12}
-            tintColor="white"
-            ratingBackgroundColor="#c8c7c8"
-            // onFinishRating={ratingCompleted}
-          />
+            <View style={styles.rating}>
+              <Rating
+                type="custom"
+                fractions={1}
+                startingValue={5}
+                readonly
+                imageSize={12}
+                tintColor="white"
+                ratingBackgroundColor="#c8c7c8"
+                // onFinishRating={ratingCompleted}
+              />
+            </View>
+          </View>
         </View>
-      </View>
-      <Gap width={80} />
-      <View>
         <View>
           <Text style={styles.price}>$200</Text>
         </View>
@@ -52,8 +53,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0,
     elevation: 4,
+  },
+  content: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  info: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   image: {
     alignSelf: 'center',

@@ -1,12 +1,13 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { AppBar, Button, CardBox, InputFields } from '../../components';
-import { colors } from '../../utils';
-
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {AppBar, Button, CardBox, InputFields} from '../../components';
+import {colors, Login} from '../../utils';
 
 const SignIn = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const styles = StyleSheet.create({
     title: {
@@ -20,6 +21,16 @@ const SignIn = () => {
     alignCenter: {alignSelf: 'center'},
   });
 
+  const data = {username, password};
+  const handleLogin = async () => {
+    try {
+      let res = await Login('https://fakestoreapi.com/auth/login', data);
+      console.warn(res);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
   return (
     <SafeAreaView>
       <AppBar noshadow label={'Sign In'} />
@@ -27,17 +38,29 @@ const SignIn = () => {
       <View style={styles.loginBar}>
         <CardBox padding center shadow height={350}>
           <SafeAreaView style={styles.widthInput}>
-            <Text style={[styles.alignCenter, styles.title]}>Sign in to enatria.</Text>
+            <Text style={[styles.alignCenter, styles.title]}>
+              Sign in to enatria.
+            </Text>
             <View style={styles.mt12}>
-              <InputFields inlineIcon={'ic_avatar'} placeHolder={'Username'} />
+              <InputFields
+                inlineIcon={'ic_avatar'}
+                value={username}
+                onChangeText={e => setUsername(e.target.value)}
+                placeHolder={'Username'}
+              />
             </View>
 
             <View style={styles.mt12}>
-              <InputFields inlineIcon={'ic_padlock'} password placeHolder={'Password'} />
+              <InputFields
+                inlineIcon={'ic_padlock'}
+                value={password}
+                onChangeText={e => setPassword(e.target.value)}
+                placeHolder={'Password'}
+              />
             </View>
 
             <View style={styles.mt12}>
-              <Button title={'Sign In'} />
+              <Button title={'Sign In'} onPress={handleLogin} />
             </View>
 
             <View style={styles.mt12}>
