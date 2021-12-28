@@ -1,7 +1,21 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {AppBar, Button, Gap, HotelSearchResult, SearchCard, SlideTopDestination} from '../../components';
+import React, {useState} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {
+  AppBar,
+  Button,
+  Gap,
+  HotelSearchResult,
+  SearchCard,
+  SlideTopDestination,
+} from '../../components';
 
 const Home = ({navigation}) => {
   const [search, setSearch] = useState(undefined);
@@ -29,27 +43,30 @@ const Home = ({navigation}) => {
   return (
     <View>
       <AppBar label={label} />
+      <Button title="login" onPress={() => navigation.navigate('SignIn')} />
       <SafeAreaView>
         <SearchCard navigation={navigation} action={{setSearch, setLabel}} />
       </SafeAreaView>
       <ScrollView>
         <SafeAreaView>
-          {search !== undefined ?
-              <>
-                <TouchableOpacity style={styles.reset} onPress={() => {
+          {search !== undefined ? (
+            <>
+              <TouchableOpacity
+                style={styles.reset}
+                onPress={() => {
                   setSearch(undefined);
                   setLabel('Home');
                 }}>
-                  <Text style={styles.textReset}>reset</Text>
-                </TouchableOpacity>
-                <HotelSearchResult navigation={navigation} />
-              </>
-              :
-              <>
+                <Text style={styles.textReset}>reset</Text>
+              </TouchableOpacity>
+              <HotelSearchResult navigation={navigation} />
+            </>
+          ) : (
+            <>
               <SlideTopDestination label={'TOP DESTINATION'} />
               <SlideTopDestination label={'POPULAR DESTINATION'} />
             </>
-          }
+          )}
         </SafeAreaView>
         <Gap height={305} />
       </ScrollView>

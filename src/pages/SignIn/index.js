@@ -5,9 +5,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppBar, Button, CardBox, InputFields} from '../../components';
 import {colors, Login} from '../../utils';
 
-const SignIn = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const SignIn = ({navigation}) => {
+  const [username, onChangeUsername] = useState('');
+  const [password, onChangePassword] = useState('');
 
   const styles = StyleSheet.create({
     title: {
@@ -22,12 +22,14 @@ const SignIn = () => {
   });
 
   const data = {username, password};
+  console.log(data);
   const handleLogin = async () => {
     try {
       let res = await Login('https://fakestoreapi.com/auth/login', data);
-      console.warn(res);
+      console.log(res.data);
+      navigation.navigate('HomeScreen');
     } catch (e) {
-      console.warn(e);
+      console.log(e);
     }
   };
 
@@ -45,7 +47,7 @@ const SignIn = () => {
               <InputFields
                 inlineIcon={'ic_avatar'}
                 value={username}
-                onChangeText={e => setUsername(e.target.value)}
+                onChangeText={onChangeUsername}
                 placeHolder={'Username'}
               />
             </View>
@@ -54,7 +56,7 @@ const SignIn = () => {
               <InputFields
                 inlineIcon={'ic_padlock'}
                 value={password}
-                onChangeText={e => setPassword(e.target.value)}
+                onChangeText={onChangePassword}
                 placeHolder={'Password'}
               />
             </View>

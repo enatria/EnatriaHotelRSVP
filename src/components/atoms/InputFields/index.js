@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import {TextInput, StyleSheet, SafeAreaView} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { colors } from '../../../utils/colors';
+import {colors} from '../../../utils/colors';
 
 const styles = StyleSheet.create({
   input: {
@@ -27,29 +27,46 @@ const styles = StyleSheet.create({
   },
 });
 
-const InputFields = ({inlineIcon, placeHolder, number, password}) => {
-
+const InputFields = ({
+  inlineIcon,
+  placeHolder,
+  number,
+  password,
+  value,
+  onChangeText,
+}) => {
   return (
     <SafeAreaView>
-      {number ?
-      <TextInput
-        style={styles.input}
-        inlineImageLeft={inlineIcon}
-        placeholder={placeHolder}
-        inlineImagePadding={8}
-        keyboardType="number-pad"/>
-      : password ?
-      <TextInput
-        style={styles.input}
-        inlineImageLeft={inlineIcon}
-        placeholder={placeHolder}
-        inlineImagePadding={8}
-        secureTextEntry/>
-      : <TextInput
-        style={styles.input}
-        inlineImageLeft={inlineIcon}
-        placeholder={placeHolder}
-        inlineImagePadding={8}/>}
+      {number ? (
+        <TextInput
+          style={styles.input}
+          inlineImageLeft={inlineIcon}
+          placeholder={placeHolder}
+          value={value}
+          onChangeText={onChangeText}
+          inlineImagePadding={8}
+          keyboardType="number-pad"
+        />
+      ) : password ? (
+        <TextInput
+          style={styles.input}
+          inlineImageLeft={inlineIcon}
+          onChangeText={onChangeText}
+          value={value}
+          placeholder={placeHolder}
+          inlineImagePadding={8}
+          secureTextEntry
+        />
+      ) : (
+        <TextInput
+          style={styles.input}
+          inlineImageLeft={inlineIcon}
+          onChangeText={onChangeText}
+          value={value}
+          placeholder={placeHolder}
+          inlineImagePadding={8}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -71,38 +88,39 @@ export const InputDatePicker = ({placeHolder}) => {
   return (
     <SafeAreaView>
       <TextInput
-      onPressIn={() => {
-        setOpen(true);
-      }}
-      style={[styles.input, {fontSize: 14}]}
-      inlineImageLeft="ic_calendar"
-      inlineImagePadding={8}
-      value={value}
-      placeholder={placeHolder}
+        onPressIn={() => {
+          setOpen(true);
+        }}
+        style={[styles.input, {fontSize: 14}]}
+        inlineImageLeft="ic_calendar"
+        inlineImagePadding={8}
+        value={value}
+        placeholder={placeHolder}
       />
 
       <DatePicker
-      modal
-      date={dateInit}
-      open={open}
-      onConfirm={(time) => {
-        setOpen(false);
-        console.log(typeof time);
+        modal
+        date={dateInit}
+        open={open}
+        onConfirm={time => {
+          setOpen(false);
+          console.log(typeof time);
 
-        setDateInit(time);
+          setDateInit(time);
 
-        const date    = time.getDate();
-        const month   = time.getMonth() + 1;
-        const year    = time.getFullYear();
-        const hours   = time.getHours();
-        const minutes = time.getMinutes();
+          const date = time.getDate();
+          const month = time.getMonth() + 1;
+          const year = time.getFullYear();
+          const hours = time.getHours();
+          const minutes = time.getMinutes();
 
-        const fullDate = `${date}-${month}-${year} ${hours}:${minutes}`;
-        console.log(fullDate);
+          const fullDate = `${date}-${month}-${year} ${hours}:${minutes}`;
+          console.log(fullDate);
 
-        setValue(fullDate);
-      }}
-      onCancel={() => setOpen(false)} />
+          setValue(fullDate);
+        }}
+        onCancel={() => setOpen(false)}
+      />
     </SafeAreaView>
   );
 };
