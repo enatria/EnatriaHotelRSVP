@@ -29,7 +29,6 @@ const Home = ({navigation}) => {
   return (
     <View>
       <AppBar label={label} />
-      <Button title={'signin'} onPress={() => navigation.navigate('SignIn')} />
       <SafeAreaView>
         <SearchCard navigation={navigation} action={{setSearch, setLabel}} />
       </SafeAreaView>
@@ -52,7 +51,7 @@ const Home = ({navigation}) => {
             </>
           }
         </SafeAreaView>
-        <Gap height={300} />
+        <Gap height={305} />
       </ScrollView>
     </View>
   );

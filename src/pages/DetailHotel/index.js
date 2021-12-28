@@ -19,16 +19,20 @@ import {
 } from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../utils';
+import { useNavigation } from '@react-navigation/native';
 
 const image = {
-  uri: 'https://reactjs.org/logo-og.png',
+  uri: 'https://exp.cdn-hotels.com/hotels/1000000/530000/523700/523615/fc6a3e32_z.jpg',
 };
 
 const DetailHotel = () => {
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <AppBar label={'Hotel Detail'} bg="transparent" />
+        <AppBar backArrow hiddenStatusBar label={'Hotel Detail'} bg="transparent" />
         <Gap height={70} />
         <View style={styles.content}>
           <Text style={styles.title}>Rose Garden Hotel</Text>
@@ -81,7 +85,7 @@ const DetailHotel = () => {
         </View>
       </ScrollView>
       <View style={{marginHorizontal: 20}}>
-        <Button title="Book Hotel" />
+        <Button title="Book Hotel" onPress={() => navigation.navigate('Booking')} />
       </View>
     </View>
   );

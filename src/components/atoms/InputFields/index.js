@@ -7,10 +7,12 @@ import { colors } from '../../../utils/colors';
 const styles = StyleSheet.create({
   input: {
     color: colors.text,
+    fontFamily: 'Poppins',
     height: 40,
     margin: 3,
     fontSize: 16,
     borderWidth: 0,
+    paddingLeft: 6,
     backgroundColor: '#fff',
     borderColor: '#fff',
     borderRadius: 10,
@@ -34,20 +36,20 @@ const InputFields = ({inlineIcon, placeHolder, number, password}) => {
         style={styles.input}
         inlineImageLeft={inlineIcon}
         placeholder={placeHolder}
-        inlineImagePadding={5}
+        inlineImagePadding={8}
         keyboardType="number-pad"/>
       : password ?
       <TextInput
         style={styles.input}
         inlineImageLeft={inlineIcon}
         placeholder={placeHolder}
-        inlineImagePadding={5}
+        inlineImagePadding={8}
         secureTextEntry/>
       : <TextInput
         style={styles.input}
         inlineImageLeft={inlineIcon}
         placeholder={placeHolder}
-        inlineImagePadding={5}/>}
+        inlineImagePadding={8}/>}
     </SafeAreaView>
   );
 };
@@ -60,9 +62,11 @@ InputFields.defaultProps = {
 export default InputFields;
 
 export const InputDatePicker = ({placeHolder}) => {
-  const dateInit = new Date();
-  const [value, setValue] = useState('');
+  const [dateInit, setDateInit] = useState(new Date());
+  const [value, setValue] = useState();
   const [open, setOpen] = useState(false);
+
+  console.log(value);
 
   return (
     <SafeAreaView>
@@ -72,7 +76,7 @@ export const InputDatePicker = ({placeHolder}) => {
       }}
       style={[styles.input, {fontSize: 14}]}
       inlineImageLeft="ic_calendar"
-      inlineImagePadding={5}
+      inlineImagePadding={8}
       value={value}
       placeholder={placeHolder}
       />
@@ -84,6 +88,8 @@ export const InputDatePicker = ({placeHolder}) => {
       onConfirm={(time) => {
         setOpen(false);
         console.log(typeof time);
+
+        setDateInit(time);
 
         const date    = time.getDate();
         const month   = time.getMonth() + 1;
