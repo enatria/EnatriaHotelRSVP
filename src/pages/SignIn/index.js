@@ -4,11 +4,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppBar, Button, CardBox, InputFields} from '../../components';
 import {colors, Login} from '../../utils';
+import {addUser} from '../../redux/hotelSlice';
+import {useDispatch} from 'react-redux';
 
 const SignIn = ({navigation}) => {
   const [username, onChangeUsername] = useState('');
   const [password, onChangePassword] = useState('');
 
+  const dispatch = useDispatch();
   const styles = StyleSheet.create({
     title: {
       fontFamily: 'Poppins-SemiBold',
@@ -21,12 +24,13 @@ const SignIn = ({navigation}) => {
     alignCenter: {alignSelf: 'center'},
   });
 
-  const data = {username, password};
-  console.log(data);
+  const user = {username, password};
+  console.log(user);
   const handleLogin = async () => {
     try {
-      let res = await Login('https://fakestoreapi.com/auth/login', data);
+      let res = await Login('https://fakestoreapi.com/auth/login', user);
       console.log(res.data);
+      dispatch(addUser({username: user.username, token: res.data.token}));
       navigation.navigate('HomeScreen');
     } catch (e) {
       console.log(e);

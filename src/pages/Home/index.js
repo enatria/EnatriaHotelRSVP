@@ -16,6 +16,7 @@ import {
   SearchCard,
   SlideTopDestination,
 } from '../../components';
+import {getUser} from '../../utils';
 
 const Home = ({navigation}) => {
   const [search, setSearch] = useState(undefined);
@@ -43,7 +44,11 @@ const Home = ({navigation}) => {
   return (
     <View>
       <AppBar label={label} />
-      <Button title="login" onPress={() => navigation.navigate('SignIn')} />
+      {!getUser() ? (
+        <Button title="login" onPress={() => navigation.navigate('SignIn')} />
+      ) : (
+        <></>
+      )}
       <SafeAreaView>
         <SearchCard navigation={navigation} action={{setSearch, setLabel}} />
       </SafeAreaView>
