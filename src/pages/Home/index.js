@@ -17,10 +17,13 @@ import {
   SlideTopDestination,
 } from '../../components';
 import {getUser} from '../../utils';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../redux/hotelSlice';
 
 const Home = ({navigation}) => {
   const [search, setSearch] = useState(undefined);
   const [label, setLabel] = useState('Home');
+  const dispatch = useDispatch();
 
   const styles = StyleSheet.create({
     reset: {
@@ -47,7 +50,7 @@ const Home = ({navigation}) => {
       {!getUser() ? (
         <Button title="login" onPress={() => navigation.navigate('SignIn')} />
       ) : (
-        <></>
+        <Button title="logout" onPress={() => dispatch(logout())} />
       )}
       <SafeAreaView>
         <SearchCard navigation={navigation} action={{setSearch, setLabel}} />

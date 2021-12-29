@@ -66,8 +66,13 @@ const hotelSlice = createSlice({
     addUser: (state, action) => {
       console.log('state', state);
       if (state.user) {
-        console.log(state);
-        console.log('gada', state);
+        state.user = {
+          username: state.username,
+          token: state.token,
+          firstName: action.payload.firstname,
+          lastName: action.payload.lastname,
+          email: action.payload.email,
+        };
       } else {
         state.user = {
           username: action.payload.username,
@@ -78,8 +83,12 @@ const hotelSlice = createSlice({
         AsyncStorage.setItem('user', JSON.stringify(state.user));
       }
     },
+    logout: () => {
+      AsyncStorage.removeItem('user');
+    },
   },
 });
 
-export const {addDataHotel, favouriteHotelToggle, addUser} = hotelSlice.actions;
+export const {addDataHotel, favouriteHotelToggle, addUser, logout} =
+  hotelSlice.actions;
 export default hotelSlice.reducer;
