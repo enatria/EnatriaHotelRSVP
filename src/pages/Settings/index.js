@@ -1,13 +1,14 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { Text, View } from 'react-native';
-import { AppBar } from '../../components';
+import {View} from 'react-native';
+import {AppBar} from '../../components';
+import SettingsCard from '../../components/molecules/SettingsCard';
 
 const Settings = () => {
   return (
     <View>
       <AppBar backArrow label={'Settings'} />
-      <Text>Ini Settings</Text>
+      <SettingsCard />
     </View>
   );
 };
