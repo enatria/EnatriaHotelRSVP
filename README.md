@@ -93,3 +93,16 @@ const options = {
 ```
 
 - Result = array ada baseURl dan mainURL
+
+5. Review Of the Hotel
+```
+const options = {
+  method: 'GET',
+  url: 'https://hotels-com-provider.p.rapidapi.com/v1/hotels/reviews',
+  params: {locale: 'en_US', hotel_id: '363464', page_number: '1'},
+  headers: {
+    'x-rapidapi-host': 'hotels-com-provider.p.rapidapi.com',
+    'x-rapidapi-key': '675e85c89emsh2396f7a6f504e16p130ccfjsn94ee725cf578'
+  }
+};
+```
