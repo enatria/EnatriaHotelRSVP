@@ -55,3 +55,30 @@ export const getHotels = params => {
       return error;
     });
 };
+
+export const getDetails = params => {
+  const options = {
+    method: 'GET',
+    url: URL + '/hotels/booking-details',
+    params: {
+      adults_number: params.adults_number,
+      checkin_date: params.checkin_date,
+      locale: 'en_US',
+      currency: 'USD',
+      hotel_id: params.hotel_id,
+      checkout_date: params.checkout_date,
+    },
+    headers: HEADERS,
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+      return response;
+    })
+    .catch(function (error) {
+      console.error(error);
+      return error;
+    });
+};
