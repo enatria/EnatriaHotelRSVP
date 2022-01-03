@@ -4,7 +4,13 @@ export const setTokens = authRes => {
   AsyncStorage.setItem('token', JSON.stringify(authRes.token));
 };
 
-export const removeTokens = () => {
-  AsyncStorage.removeItem('token');
+export const removeUser = () => {
+  AsyncStorage.removeItem('user');
 };
-export const getUser = () => AsyncStorage.getItem('user');
+export const getUser = async () => {
+  try {
+    await AsyncStorage.getItem('user');
+  } catch (e) {
+    console.log(e);
+  }
+};

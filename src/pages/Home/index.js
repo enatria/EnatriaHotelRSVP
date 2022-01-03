@@ -16,7 +16,7 @@ import {
   SearchCard,
   SlideTopDestination,
 } from '../../components';
-import {getUser} from '../../utils';
+import {getUser, removeUser} from '../../utils';
 import {useDispatch} from 'react-redux';
 import {logout} from '../../redux/hotelSlice';
 
@@ -44,13 +44,21 @@ const Home = ({navigation}) => {
     },
   });
 
+  const handleLogout = async () => {
+    try {
+      await dispatch(logout());
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <View>
       <AppBar label={label} />
       {!getUser() ? (
         <Button title="login" onPress={() => navigation.navigate('SignIn')} />
       ) : (
-        <Button title="logout" onPress={() => dispatch(logout())} />
+        <Button title="logout" onPress={handleLogout} />
       )}
       <SafeAreaView>
         <SearchCard navigation={navigation} action={{setSearch, setLabel}} />
