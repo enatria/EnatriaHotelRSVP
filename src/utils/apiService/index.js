@@ -29,7 +29,7 @@ export const getDestinationId = (query = query) => {
 };
 
 export const getHotels = params => {
-  const options = {
+  return {
     method: 'GET',
     url: URL + '/hotels/search',
     params: {
@@ -44,17 +44,6 @@ export const getHotels = params => {
     },
     headers: HEADERS,
   };
-
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data);
-      return response;
-    })
-    .catch(function (error) {
-      console.error(error);
-      return error;
-    });
 };
 
 export const useGetDetails = params => {
@@ -65,8 +54,8 @@ export const useGetDetails = params => {
     params: {
       adults_number: params.adults_number,
       checkin_date: params.checkin_date,
-      locale: 'en_US',
-      currency: 'USD',
+      locale: 'in_ID',
+      currency: 'IDR',
       hotel_id: params.hotel_id,
       checkout_date: params.checkout_date,
     },

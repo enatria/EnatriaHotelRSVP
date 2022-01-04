@@ -2,6 +2,8 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { Button, CardBox, InputDatePicker, InputFields } from '../..';
+import {useDispatch} from 'react-redux';
+import { getAllState, getCheckIn, getCheckOut, getDestinationId, getGuest } from '../../../redux/requiredForFetchSlice';
 
 const styles = StyleSheet.create({
   row: {
@@ -20,6 +22,7 @@ const styles = StyleSheet.create({
 });
 
 const SearchCard = ({navigation, action}) => {
+  const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.margin}>
       <CardBox shadow padding>
@@ -37,6 +40,14 @@ const SearchCard = ({navigation, action}) => {
           <Button title="Search" onPress={() => {
             action.setSearch(1);
             action.setLabel('Search Result');
+            const payload = {
+              destinationId: '1721646',
+              hotelId: null,
+              checkIn: '2022-01-26',
+              checkOut: '2022-01-27',
+              guest: '1',
+            };
+            dispatch(getAllState(payload));
           }} />
         </SafeAreaView>
       </CardBox>
