@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 const URL = 'https://hotels-com-provider.p.rapidapi.com/v1';
@@ -56,7 +57,8 @@ export const getHotels = params => {
     });
 };
 
-export const getDetails = params => {
+export const useGetDetails = params => {
+  const [detail, setDetail] = useState(null);
   const options = {
     method: 'GET',
     url: URL + '/hotels/booking-details',
@@ -71,14 +73,17 @@ export const getDetails = params => {
     headers: HEADERS,
   };
 
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data);
-      return response;
-    })
-    .catch(function (error) {
-      console.error(error);
-      return error;
-    });
+  useEffect(() => {
+    try {
+      axios.request(options).then(function (response) {
+        console.log('name', response.data.name);
+        setDetail(response.data);
+      });
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  }, []);
+
+  return {detail};
 };

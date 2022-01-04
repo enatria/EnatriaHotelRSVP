@@ -2,13 +2,13 @@ import React from 'react';
 import {View, ScrollView} from 'react-native';
 import {Badge} from '../../';
 
-const ListRoomTypes = () => {
+const ListRoomTypes = ({room}) => {
+  const filteredRooms = room?.filter(item => item !== '');
   return (
     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-      <Badge label="Classic Double Room, 1 King Bed" />
-      <Badge label="Classic Double Room, 1 King Bed" />
-      <Badge label="Classic Double Room, 1 King Bed" />
-      <Badge label="Classic Double Room, 1 King Bed" />
+      {filteredRooms?.map(item => (
+        <Badge label={item} key={item.id} />
+      ))}
     </ScrollView>
   );
 };
