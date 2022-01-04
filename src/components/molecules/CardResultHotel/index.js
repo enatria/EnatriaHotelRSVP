@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
   detailBar: {backgroundColor: 'white', padding: 12, borderRadius: 10},
 });
 
-const image = {
-  uri: 'https://exp.cdn-hotels.com/hotels/1000000/530000/523700/523615/fc6a3e32_z.jpg',
-};
+// const image = {
+//   uri: 'https://exp.cdn-hotels.com/hotels/1000000/530000/523700/523615/fc6a3e32_z.jpg',
+// };
 
-const CardResultHotel = ({name, rating, address, price, isFavourites}) => {
+const CardResultHotel = ({name, rating, address, price, isFavourites, image}) => {
   return (
     <SafeAreaView style={styles.container}>
       <CardBox shadow>

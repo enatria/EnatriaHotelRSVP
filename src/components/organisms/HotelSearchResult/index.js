@@ -1,10 +1,16 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import {FlatList, Pressable} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 import {CardResultHotel} from '../..';
+import { getHotels } from '../../../utils/apiService';
 
 const HotelSearchResult = ({navigation}) => {
+  const [hotels, setHotels] = useState();
+  const {destinationId, checkIn, checkOut, guest} = useSelector(state => state.requiredForFetch);
+
   const exampleApiResponse = {
     address: {
       streetAddress: 'Sadovnicheskaya 20 str. 1',
@@ -17,32 +23,42 @@ const HotelSearchResult = ({navigation}) => {
     },
   };
 
-  const data = [
-    {
-      id: '676613',
-      name: 'Sadovnicheskaya Hotel',
-      address: `${exampleApiResponse.address.streetAddress}, ${exampleApiResponse.address.locality}`,
-      starRating: 5,
-      price: exampleApiResponse.ratePlan.price.current,
-      isFavourite: true,
-    },
-    {
-      id: '676614',
-      name: 'Sadovnicheskaya Hotel 2',
-      address: `${exampleApiResponse.address.streetAddress}, ${exampleApiResponse.address.locality}`,
-      starRating: 3.5,
-      price: exampleApiResponse.ratePlan.price.current,
-      isFavourite: false,
-    },
-    {
-      id: '676615',
-      name: 'Sadovnicheskaya Hotel 3',
-      address: `${exampleApiResponse.address.streetAddress}, ${exampleApiResponse.address.locality}`,
-      starRating: 3.6,
-      price: exampleApiResponse.ratePlan.price.current,
-      isFavourite: false,
-    },
-  ];
+  useEffect(() => {
+    const params = {
+      checkin_date: checkIn,
+      checkout_date: checkOut,
+      destination_id: destinationId,
+      adults_number: guest,
+    };
+    // const response = getHotels(params);
+    // setHotels(response);
+    const options = getHotels(params);
+
+    axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data.searchResults.results);
+      const data = response.data.searchResults.results;
+      const hotel = data.map(item => {
+        return {
+          ...item,
+          address: `${item.address.streetAddress}, ${item.address.locality}`,
+          price: item.ratePlan.price.current,
+          image: {
+            uri: item.optimizedThumbUrls.srpDesktop,
+          },
+        };
+      });
+      setHotels(hotel);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+  }, [checkIn, checkOut, destinationId, guest]);
+
+  console.log('destinationId :', destinationId);
+  console.log('data hotels :', hotels);
+
 
   const renderItem = ({item}) => {
     return (
@@ -54,6 +70,7 @@ const HotelSearchResult = ({navigation}) => {
           price={item.price}
           navigation={navigation}
           isFavourites={item.isFavourite}
+          image={item.image}
         />
       </Pressable>
     );
@@ -62,7 +79,7 @@ const HotelSearchResult = ({navigation}) => {
   return (
     <SafeAreaView>
       <FlatList
-        data={data}
+        data={hotels}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />

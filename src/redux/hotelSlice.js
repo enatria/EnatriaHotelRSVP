@@ -11,7 +11,7 @@ const hotelSlice = createSlice({
   name: 'hotel',
   initialState,
   reducers: {
-    getDataHotel: (state, action) => {
+    addDataHotel: (state, action) => {
       // set data hotel to redux persist
       return {items: action.payload};
     },

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -24,6 +24,7 @@ const Home = ({navigation}) => {
   const [search, setSearch] = useState(undefined);
   const [label, setLabel] = useState('Home');
   const dispatch = useDispatch();
+
 
   const styles = StyleSheet.create({
     reset: {

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import axios from 'axios';
 
@@ -28,7 +29,7 @@ export const getDestinationId = (query = query) => {
 };
 
 export const getHotels = params => {
-  const options = {
+  return {
     method: 'GET',
     url: URL + '/hotels/search',
     params: {
@@ -44,16 +45,6 @@ export const getHotels = params => {
     headers: HEADERS,
   };
 
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data);
-      return response;
-    })
-    .catch(function (error) {
-      console.error(error);
-      return error;
-    });
 };
 
 export const getDetails = params => {
