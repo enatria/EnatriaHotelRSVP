@@ -4,8 +4,10 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Rating} from 'react-native-ratings';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 import {CardBox} from '../..';
 import {icons} from '../../../assets';
+import { favouriteHotelToggle } from '../../../redux/hotelSlice';
 import {colors} from '../../../utils';
 
 const styles = StyleSheet.create({
@@ -35,14 +37,20 @@ const styles = StyleSheet.create({
 //   uri: 'https://exp.cdn-hotels.com/hotels/1000000/530000/523700/523615/fc6a3e32_z.jpg',
 // };
 
-const CardResultHotel = ({name, rating, address, price, isFavourites, image}) => {
+const CardResultHotel = ({id, name, rating, address, price, isFavourite, image}) => {
+  const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.container}>
       <CardBox shadow>
         <Image source={image} style={styles.hotelImg} />
         <View style={{flexDirection: 'row-reverse'}}>
-          <TouchableOpacity style={styles.favBtn}>
-            <Image source={isFavourites ? icons.HEART_RED : icons.HEART} style={{width: 20, height: 20}} />
+          <TouchableOpacity style={styles.favBtn} onPress={
+            () => {
+              console.log('fav ditekan');
+              dispatch(favouriteHotelToggle({id, isFavourite}));
+            }
+          }>
+            <Image source={isFavourite ? icons.HEART_RED : icons.HEART} style={{width: 20, height: 20}} />
           </TouchableOpacity>
         </View>
         <View style={styles.detailBar}>

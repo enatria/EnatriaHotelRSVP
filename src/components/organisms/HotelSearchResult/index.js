@@ -1,27 +1,19 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {FlatList, Pressable} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import {CardResultHotel} from '../..';
 import { getHotels } from '../../../utils/apiService';
+import {useDispatch} from 'react-redux';
+import {getHotelId} from '../../../redux/requiredForFetchSlice';
+import { addDataHotel } from '../../../redux/hotelSlice';
 
 const HotelSearchResult = ({navigation}) => {
-  const [hotels, setHotels] = useState();
+  const hotels = useSelector(state => state.hotel.items);
   const {destinationId, checkIn, checkOut, guest} = useSelector(state => state.requiredForFetch);
-
-  const exampleApiResponse = {
-    address: {
-      streetAddress: 'Sadovnicheskaya 20 str. 1',
-      locality: 'Moscow',
-    },
-    ratePlan: {
-      price: {
-        current: '$279',
-      },
-    },
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const params = {
@@ -49,28 +41,30 @@ const HotelSearchResult = ({navigation}) => {
           },
         };
       });
-      setHotels(hotel);
+      dispatch(addDataHotel(hotel));
     })
     .catch(function (error) {
       console.error(error);
     });
-  }, [checkIn, checkOut, destinationId, guest]);
+  }, [checkIn, checkOut, destinationId, guest, dispatch]);
 
   console.log('destinationId :', destinationId);
-  console.log('data hotels :', hotels);
-
 
   const renderItem = ({item}) => {
     return (
-      <Pressable onPress={() => navigation.navigate('Details')}>
+      <Pressable onPress={() => {
+        navigation.navigate('Details');
+        dispatch(getHotelId(item.id));
+      }}>
         <CardResultHotel
           name={item.name}
           rating={item.starRating}
           address={item.address}
           price={item.price}
           navigation={navigation}
-          isFavourites={item.isFavourite}
+          isFavourite={item.isFavourite}
           image={item.image}
+          id={item.id}
         />
       </Pressable>
     );
