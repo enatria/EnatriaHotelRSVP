@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const initialState = {
   items: [],
   user: AsyncStorage.getItem('user'),
+  favourites: [],
 };
 
 const hotelSlice = createSlice({
@@ -13,10 +14,15 @@ const hotelSlice = createSlice({
   reducers: {
     addDataHotel: (state, action) => {
       // set data hotel to redux persist
-      return {items: action.payload};
+      return {
+        items: action.payload,
+        favourites: state.favourites,
+        user: state.user,
+      };
     },
     favouriteHotelToggle: (state, action) => {
       let temp = [];
+      let dataFav;
       const filteredHotel = state.items.filter(
         item => item.id === action.payload.id,
       );
@@ -27,15 +33,26 @@ const hotelSlice = createSlice({
             if (item.id === action.payload.id) {
               let isFavourite;
               if (action.payload.isFavourite) {
-                isFavourite = false;
-                //  delete/pop data favourite hotel's data from redux persist
+                const index = state.favourites.findIndex(itemFav => itemFav.id === action.payload.id);
+
+                if (index !== -1) {
+                  dataFav = [...state.favourites];
+                  dataFav.splice(index, 1);
+                  isFavourite = false;
+                }
               } else {
                 isFavourite = true;
                 const favouritedHotel = {
                   ...item,
                   isFavourite,
                 };
-                //  add/push favouritedHotel to redux persist in favourite hotel
+
+                if (state.favourites === undefined || state.favourites.length < 1) {
+                  dataFav = [];
+                  dataFav.push(favouritedHotel);
+                } else {
+                  dataFav = [...state.favourites, favouritedHotel];
+                }
               }
 
               temp.push({
@@ -49,8 +66,11 @@ const hotelSlice = createSlice({
         }
       }
 
-      // set data hotel to redux persist
-      return {items: temp};
+      return {
+        items: temp,
+        favourites: dataFav,
+        user: state.user,
+      };
     },
     bookingHotel: (state, action) => {
       let temp = [];
