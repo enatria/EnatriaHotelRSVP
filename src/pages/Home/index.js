@@ -25,7 +25,6 @@ const Home = ({navigation}) => {
   const [label, setLabel] = useState('Home');
   const dispatch = useDispatch();
 
-
   const styles = StyleSheet.create({
     reset: {
       alignSelf: 'flex-end',
@@ -55,12 +54,14 @@ const Home = ({navigation}) => {
 
   return (
     <View>
+      {/* <Text>{getUser()}</Text> */}
       <AppBar label={label} />
-      {!getUser() ? (
-        <Button title="login" onPress={() => navigation.navigate('SignIn')} />
-      ) : (
-        <Button title="logout" onPress={handleLogout} />
-      )}
+      {/* {!getUser() ? ( */}
+      <Button title="login" onPress={() => navigation.navigate('SignIn')} />
+      
+      {/* // ) : (
+      // //   <Button title="logout" onPress={handleLogout} />
+      // // )} */}
       <SafeAreaView>
         <SearchCard navigation={navigation} action={{setSearch, setLabel}} />
       </SafeAreaView>

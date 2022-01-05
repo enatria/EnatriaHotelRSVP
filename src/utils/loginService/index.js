@@ -9,7 +9,7 @@ export const removeUser = () => {
 };
 export const getUser = async () => {
   try {
-    await AsyncStorage.getItem('user');
+    return await AsyncStorage.getItem('user');
   } catch (e) {
     console.log(e);
   }
