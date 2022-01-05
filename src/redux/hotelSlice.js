@@ -1,6 +1,11 @@
 /* eslint-disable prettier/prettier */
 import {createSlice} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KEY as FavKey} from '../utils';
+
+const setToLocal = async (data) => {
+  await AsyncStorage.setItem(FavKey, JSON.stringify(data));
+};
 
 const initialState = {
   items: [],
@@ -20,40 +25,53 @@ const hotelSlice = createSlice({
         user: state.user,
       };
     },
+    addDataFavourite: (state, action) => {
+      return {
+        items: state.items,
+        user: state.user,
+        favourites: action.payload,
+      };
+    },
     favouriteHotelToggle: (state, action) => {
       let temp = [];
       let dataFav;
+      let isFavourite;
       const filteredHotel = state.items.filter(
         item => item.id === action.payload.id,
       );
 
-      if (filteredHotel.length > 0) {
-        if (state.items.length > 0) {
+      const toggle = (dataItem) => {
+        if (action.payload.isFavourite) {
+          // jika hotel tersebut sebelumnya sudah ditambahkan ke favourite(maka akan dihapus)
+          const index = state.favourites.findIndex(itemFav => itemFav.id === action.payload.id);
+
+          if (index !== -1) {
+            dataFav = [...state.favourites];
+            dataFav.splice(index, 1);
+            isFavourite = false;
+          }
+        } else {
+          // jika sebelumnya hotel belum ditambahkan ke favourite (maka akan ditambahkan)
+          isFavourite = true;
+          const favouritedHotel = {
+            ...dataItem,
+            isFavourite,
+          };
+
+          if (state.favourites === undefined || state.favourites.length < 1) {
+            dataFav = [];
+            dataFav.push(favouritedHotel);
+          } else {
+            dataFav = [...state.favourites, favouritedHotel];
+          }
+        }
+      };
+
+      if (filteredHotel !== undefined && filteredHotel.length > 0) {
+        if (state.items !== undefined && state.items.length > 0) {
           state.items.map(item => {
             if (item.id === action.payload.id) {
-              let isFavourite;
-              if (action.payload.isFavourite) {
-                const index = state.favourites.findIndex(itemFav => itemFav.id === action.payload.id);
-
-                if (index !== -1) {
-                  dataFav = [...state.favourites];
-                  dataFav.splice(index, 1);
-                  isFavourite = false;
-                }
-              } else {
-                isFavourite = true;
-                const favouritedHotel = {
-                  ...item,
-                  isFavourite,
-                };
-
-                if (state.favourites === undefined || state.favourites.length < 1) {
-                  dataFav = [];
-                  dataFav.push(favouritedHotel);
-                } else {
-                  dataFav = [...state.favourites, favouritedHotel];
-                }
-              }
+              toggle(item);
 
               temp.push({
                 ...item,
@@ -64,7 +82,16 @@ const hotelSlice = createSlice({
             }
           });
         }
+      } else {
+        state.favourites.map(item => {
+          if (item.id === action.payload.id) {
+            toggle(item);
+          }
+        });
       }
+
+      setToLocal(dataFav)
+        .then(() => console.log('success'));
 
       return {
         items: temp,
@@ -109,6 +136,6 @@ const hotelSlice = createSlice({
   },
 });
 
-export const {addDataHotel, favouriteHotelToggle, addUser, logout} =
+export const {addDataHotel, addDataFavourite, favouriteHotelToggle, addUser, logout} =
   hotelSlice.actions;
 export default hotelSlice.reducer;

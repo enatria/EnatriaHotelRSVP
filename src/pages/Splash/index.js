@@ -1,14 +1,26 @@
 /* eslint-disable prettier/prettier */
 import {StackActions} from '@react-navigation/native';
 import React, {useEffect} from 'react';
+import { useCallback } from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {colors} from '../../utils';
+import { useDispatch } from 'react-redux';
+import { addDataFavourite } from '../../redux/hotelSlice';
+import {colors, getFavourite} from '../../utils';
+
 const Splash = ({navigation}) => {
+  const dispatch = useDispatch();
+  const setFavouriteToLocal = useCallback(() => {
+    getFavourite().then(data => {
+      dispatch(addDataFavourite(data));
+    });
+  }, [dispatch]);
+
   useEffect(() => {
+    setFavouriteToLocal();
     setTimeout(() => {
       navigation.dispatch(StackActions.replace('HomeScreen'));
-    }, 3000);
-  }, [navigation]);
+    }, 2000);
+  }, [navigation, setFavouriteToLocal]);
 
   return (
     <View style={styles.page}>
