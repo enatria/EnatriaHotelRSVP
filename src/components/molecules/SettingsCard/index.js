@@ -9,7 +9,7 @@ const SettingsCard = () => {
       <Text style={styles.title}>MY ACCOUNT</Text>
       <View style={styles.wrapper}>
         <View style={styles.name}>
-          <Text style={styles.detailTitle}>Nama Lengkap</Text>
+          <Text style={styles.detailTitle}>Nama</Text>
           <Text style={styles.detail}>Zainal Abidin</Text>
         </View>
         <View style={styles.name}>
@@ -20,7 +20,10 @@ const SettingsCard = () => {
           <Text style={styles.detailTitle}>Gender</Text>
           <Text style={styles.detail}>Pria</Text>
         </View>
-        <Text style={styles.edit}>Edit</Text>
+        <View style={styles.name}>
+          <Text style={styles.detailTitle}>Search History</Text>
+          <Text style={styles.detail}> > </Text>
+        </View>
       </View>
       <View style={styles.buttonEdit}>
         <Button title="Edit" />
@@ -33,16 +36,25 @@ const SettingsCard = () => {
 const styles = StyleSheet.create({
   container: {
     margin: 10,
+    marginTop: 30,
     borderRadius: 15,
     padding: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
 
   title: {
-    textAlign: 'center',
-    fontSize: 30,
+    fontSize: 20,
     fontFamily: 'Poppins-SemiBold',
     color: '#000',
-    marginBottom: 30,
+    marginBottom: 20,
   },
 
   buttonEdit: {
@@ -52,8 +64,9 @@ const styles = StyleSheet.create({
   name: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRight: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#7d8797',
+    marginBottom: 10,
   },
 
   wrapper: {
@@ -61,7 +74,7 @@ const styles = StyleSheet.create({
   },
 
   detailTitle: {
-    fontSize: 18,
+    fontSize: 15,
     color: '#000',
     fontFamily: 'Poppins-Medium',
   },
