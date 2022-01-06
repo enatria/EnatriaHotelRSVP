@@ -1,15 +1,16 @@
 /* eslint-disable prettier/prettier */
 import {createSlice} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { KEY as FavKey} from '../utils';
+import {KEY as FavKey} from '../utils';
+import {transformAsync} from '@babel/core';
 
-const setToLocal = async (data) => {
+const setToLocal = async data => {
   await AsyncStorage.setItem(FavKey, JSON.stringify(data));
 };
 
 const initialState = {
   items: [],
-  user: AsyncStorage.getItem('user'),
+  user: null,
   favourites: [],
 };
 
@@ -40,10 +41,12 @@ const hotelSlice = createSlice({
         item => item.id === action.payload.id,
       );
 
-      const toggle = (dataItem) => {
+      const toggle = dataItem => {
         if (action.payload.isFavourite) {
           // jika hotel tersebut sebelumnya sudah ditambahkan ke favourite(maka akan dihapus)
-          const index = state.favourites.findIndex(itemFav => itemFav.id === action.payload.id);
+          const index = state.favourites.findIndex(
+            itemFav => itemFav.id === action.payload.id,
+          );
 
           if (index !== -1) {
             dataFav = [...state.favourites];
@@ -90,8 +93,7 @@ const hotelSlice = createSlice({
         });
       }
 
-      setToLocal(dataFav)
-        .then(() => console.log('success'));
+      setToLocal(dataFav).then(() => console.log('success'));
 
       return {
         items: temp,
@@ -110,7 +112,7 @@ const hotelSlice = createSlice({
         }
       }
     },
-    addUser: (state, action) => {
+    addUser: async (state, action) => {
       console.log('state', state);
       if (state.user) {
         state.user = {
@@ -127,15 +129,20 @@ const hotelSlice = createSlice({
           name: 'Giwang',
         };
         console.log('con2', state);
-        AsyncStorage.setItem('user', JSON.stringify(state.user));
+        await AsyncStorage.setItem('user', JSON.stringify(state.user));
       }
     },
-    logout: () => {
-      AsyncStorage.removeItem('user');
+    logout: async () => {
+      await AsyncStorage.removeItem('user');
     },
   },
 });
 
-export const {addDataHotel, addDataFavourite, favouriteHotelToggle, addUser, logout} =
-  hotelSlice.actions;
+export const {
+  addDataHotel,
+  addDataFavourite,
+  favouriteHotelToggle,
+  addUser,
+  logout,
+} = hotelSlice.actions;
 export default hotelSlice.reducer;
