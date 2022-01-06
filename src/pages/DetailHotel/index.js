@@ -1,3 +1,5 @@
+/* eslint-disable eslint-comments/no-unused-disable */
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
 import React, {useEffect, useState} from 'react';
@@ -42,11 +44,15 @@ const DetailHotel = () => {
 
   const {detail} = useGetDetails(params);
 
-  console.log('detail', detail);
+  const filteredReviews = detail?.groupReview[0];
+  console.log('detail', filteredReviews);
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <ImageBackground
+        source={detail?.roomsAndRates?.rooms[0]?.images[0]?.thumbnailUrl}
+        resizeMode="cover"
+        style={styles.image}>
         <AppBar
           backArrow
           hiddenStatusBar
@@ -59,7 +65,7 @@ const DetailHotel = () => {
           <View style={styles.subContent}>
             <View>
               <Text style={styles.location}>
-                {detail?.address?.fullAddress}
+                {detail?.address?.cityName},{detail?.address?.countryName}
               </Text>
 
               <View style={styles.rating}>
@@ -75,7 +81,9 @@ const DetailHotel = () => {
               </View>
             </View>
             <View style={styles.price}>
-              <Text style={styles.textPrice}>$250</Text>
+              <Text style={styles.textPrice}>
+                {detail?.featuredPrice?.currentPrice?.formatted}
+              </Text>
             </View>
           </View>
         </View>
@@ -88,8 +96,9 @@ const DetailHotel = () => {
           </View>
           <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
             <SubTitle title="Amenities" />
-            <CardAmenities />
-            <CardAmenities />
+            {detail?.amenities?.map(item => (
+              <CardAmenities item={item} key={item.heading} />
+            ))}
           </View>
           <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
             <SubTitle title="Room Types" />
@@ -98,7 +107,9 @@ const DetailHotel = () => {
         </View>
         <View style={styles.review}>
           <SubTitle title="Review" />
-          <CardReview />
+          {filteredReviews?.reviews?.slice(0, 5).map(item => (
+            <CardReview item={item} key={item.heading} />
+          ))}
         </View>
       </ScrollView>
       <View style={{marginHorizontal: 20}}>
@@ -149,6 +160,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
+    width: 100,
   },
   textPrice: {
     fontSize: 15,

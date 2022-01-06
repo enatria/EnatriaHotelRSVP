@@ -80,6 +80,7 @@ export const useGetDetails = params => {
 
       var allDetail = Object.assign(detail.data, reviews.data);
       console.log('detailNIh', allDetail);
+      setDetail(allDetail);
     } catch (e) {
       console.log(e);
       return e;

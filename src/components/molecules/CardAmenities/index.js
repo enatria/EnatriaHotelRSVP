@@ -3,15 +3,15 @@ import {StyleSheet, View, Text} from 'react-native';
 import {List} from '../..';
 import {colors} from '../../../utils';
 
-const CardAmenities = () => {
+const CardAmenities = ({item}) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>In The Hotel</Text>
+        <Text style={styles.title}>{item?.heading}</Text>
         <View style={styles.list}>
-          <List color="default" label="Food and drink" />
-          <List color="default" label="Accesability" />
-          <List color="default" label="Facilities" />
+          {item?.listItems?.map(amenitiy => (
+            <List color="default" label={amenitiy?.heading} />
+          ))}
         </View>
       </View>
     </View>

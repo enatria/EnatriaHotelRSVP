@@ -1,19 +1,24 @@
+/* eslint-disable radix */
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../../utils';
-const CardReview = () => {
+
+const CardReview = ({item}) => {
+  const date = parseInt(item?.postedOn);
   return (
     <View style={styles.container}>
       <View style={styles.title}>
         <View>
-          <Text style={styles.subtitle}>Very Good ! </Text>
+          <Text style={styles.subtitle}>
+            {item?.title ? item?.title : item?.qualitativeBadgeText}
+          </Text>
         </View>
         <View style={styles.rating}>
           <Rating
             type="custom"
             fractions={1}
-            startingValue={5}
+            startingValue={parseInt(item?.rating) / 2}
             readonly
             imageSize={12}
             tintColor="white"
@@ -23,14 +28,11 @@ const CardReview = () => {
         </View>
       </View>
 
-      <Text style={styles.summary}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, suscipit.
-        Velit excepturi rem tenetur tempore tempora quasi nemo ipsum labore!
-      </Text>
+      <Text style={styles.summary}>{item?.summary}</Text>
       <View>
         <View style={styles.cardBottom}>
-          <Text style={styles.author}>by Giwang</Text>
-          <Text style={styles.date}>10 Nov 2021 </Text>
+          <Text style={styles.author}>by {item?.recommendedBy}</Text>
+          <Text style={styles.date}>{date}</Text>
         </View>
       </View>
     </View>
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0,
     elevation: 4,
+    marginBottom: 10,
   },
   title: {
     flexDirection: 'row',
