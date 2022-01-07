@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   SafeAreaView,
   ScrollView,
@@ -46,22 +47,26 @@ const Home = ({navigation}) => {
 
   const handleLogout = async () => {
     try {
-      await dispatch(logout());
+      return await AsyncStorage.removeItem('user');
     } catch (e) {
       console.log(e);
     }
   };
 
+  const checkAuth = () => {
+    if (getUser() === null) {
+      return (
+        <Button title="login" onPress={() => navigation.navigate('SignIn')} />
+      );
+    } else {
+      return <Button title="logout" onPress={handleLogout} />;
+    }
+  };
+
   return (
     <View>
-      {/* <Text>{getUser()}</Text> */}
       <AppBar label={label} />
-      {/* {!getUser() ? ( */}
       <Button title="login" onPress={() => navigation.navigate('SignIn')} />
-      
-      {/* // ) : (
-      // //   <Button title="logout" onPress={handleLogout} />
-      // // )} */}
       <SafeAreaView>
         <SearchCard navigation={navigation} action={{setSearch, setLabel}} />
       </SafeAreaView>

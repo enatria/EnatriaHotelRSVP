@@ -8,6 +8,15 @@ const setToLocal = async data => {
   await AsyncStorage.setItem(FavKey, JSON.stringify(data));
 };
 
+const userToLocal = async data => {
+  await AsyncStorage.setItem('user', JSON.stringify(data));
+};
+
+const removeItem = async data => {
+  await AsyncStorage.removeItem(data);
+  return true;
+};
+
 const initialState = {
   items: [],
   user: null,
@@ -112,25 +121,18 @@ const hotelSlice = createSlice({
         }
       }
     },
-    addUser: async (state, action) => {
+    addUser: (state, action) => {
       console.log('state', state);
-      if (state.user) {
-        state.user = {
-          username: state.username,
-          token: state.token,
-          firstName: action.payload.firstname,
-          lastName: action.payload.lastname,
-          email: action.payload.email,
-        };
-      } else {
-        state.user = {
-          username: action.payload.username,
-          token: action.payload.token,
-          name: 'Giwang',
-        };
-        console.log('con2', state);
-        await AsyncStorage.setItem('user', JSON.stringify(state.user));
-      }
+      state.user = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        username: action.payload.username,
+        token: action.payload.token,
+        name: 'Giwang',
+      };
+      console.log('con2', state);
+      userToLocal(state.user);
     },
     logout: async () => {
       await AsyncStorage.removeItem('user');

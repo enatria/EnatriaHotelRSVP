@@ -10,7 +10,11 @@ const CardAmenities = ({item}) => {
         <Text style={styles.title}>{item?.heading}</Text>
         <View style={styles.list}>
           {item?.listItems?.map(amenitiy => (
-            <List color="default" label={amenitiy?.heading} />
+            <List
+              color="default"
+              key={amenitiy.heading}
+              label={amenitiy?.heading}
+            />
           ))}
         </View>
       </View>

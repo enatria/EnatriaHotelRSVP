@@ -6,8 +6,8 @@ const ListRoomTypes = ({room}) => {
   const filteredRooms = room?.filter(item => item !== '');
   return (
     <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-      {filteredRooms?.map(item => (
-        <Badge label={item} key={item.id} />
+      {filteredRooms?.map((item, i) => (
+        <Badge label={item} key={i} />
       ))}
     </ScrollView>
   );

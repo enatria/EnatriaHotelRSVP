@@ -73,19 +73,23 @@ export const useGetDetails = params => {
     headers: HEADERS,
   };
 
-  useEffect(async () => {
+  async function fetchData() {
     try {
-      const detail = await axios.request(optionsDetail);
+      const details = await axios.request(optionsDetail);
       const reviews = await axios.request(optionsReview);
 
-      var allDetail = Object.assign(detail.data, reviews.data);
+      var allDetail = Object.assign(details.data, reviews.data);
       console.log('detailNIh', allDetail);
       setDetail(allDetail);
     } catch (e) {
       console.log(e);
       return e;
     }
-  }, []);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [params]);
 
   return {detail};
 };

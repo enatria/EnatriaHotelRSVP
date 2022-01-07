@@ -24,10 +24,6 @@ import {Rating} from 'react-native-ratings';
 import {colors, useGetDetails} from '../../utils';
 import {useNavigation} from '@react-navigation/native';
 
-const image = {
-  uri: 'https://exp.cdn-hotels.com/hotels/1000000/530000/523700/523615/fc6a3e32_z.jpg',
-};
-
 const DetailHotel = () => {
   const [data, setData] = useState(null);
   // const [error, setError] = useState(null);
@@ -46,13 +42,11 @@ const DetailHotel = () => {
 
   const filteredReviews = detail?.groupReview[0];
   console.log('detail', filteredReviews);
-
+  const image = detail?.optimizedThumbUrls;
+  console.log(image);
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={detail?.roomsAndRates?.rooms[0]?.images[0]?.thumbnailUrl}
-        resizeMode="cover"
-        style={styles.image}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <AppBar
           backArrow
           hiddenStatusBar
