@@ -29,7 +29,7 @@ const SignIn = ({navigation}) => {
   const handleLogin = async () => {
     try {
       let res = await Login('https://fakestoreapi.com/auth/login', user);
-      console.log(res.data);
+      console.log('data res :', res.data);
       dispatch(addUser({username: user.username, token: res.data.token}));
       navigation.navigate('HomeScreen');
     } catch (e) {
@@ -62,6 +62,7 @@ const SignIn = ({navigation}) => {
                 value={password}
                 onChangeText={onChangePassword}
                 placeHolder={'Password'}
+                password
               />
             </View>
 

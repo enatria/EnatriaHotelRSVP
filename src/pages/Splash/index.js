@@ -4,23 +4,26 @@ import React, {useEffect} from 'react';
 import { useCallback } from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import { useDispatch } from 'react-redux';
-import { addDataFavourite } from '../../redux/hotelSlice';
-import {colors, getFavourite} from '../../utils';
+import { addDataFavourite, addDataUser } from '../../redux/hotelSlice';
+import {colors, getFavourite, getUser} from '../../utils';
 
 const Splash = ({navigation}) => {
   const dispatch = useDispatch();
-  const setFavouriteToLocal = useCallback(() => {
+  const setStateFromLocal = useCallback(() => {
     getFavourite().then(data => {
       dispatch(addDataFavourite(data));
+    });
+    getUser().then(dataUser => {
+      dispatch(addDataUser(dataUser));
     });
   }, [dispatch]);
 
   useEffect(() => {
-    setFavouriteToLocal();
+    setStateFromLocal();
     setTimeout(() => {
       navigation.dispatch(StackActions.replace('HomeScreen'));
     }, 2000);
-  }, [navigation, setFavouriteToLocal]);
+  }, [navigation, setStateFromLocal]);
 
   return (
     <View style={styles.page}>

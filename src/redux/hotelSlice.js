@@ -28,9 +28,22 @@ const hotelSlice = createSlice({
   initialState,
   reducers: {
     addDataHotel: (state, action) => {
-      // set data hotel to redux persist
+      let temp = [];
+      action.payload.map(item => {
+        const findIndex = state.favourites.findIndex(hotel => hotel.id === item.id);
+
+        if (findIndex !== undefined && findIndex !== -1) {
+          const update = {
+            ...item,
+            isFavourite: true,
+          };
+          temp.push(update);
+        } else {
+          temp.push(item);
+        }
+      });
       return {
-        items: action.payload,
+        items: temp,
         favourites: state.favourites,
         user: state.user,
       };
@@ -123,19 +136,23 @@ const hotelSlice = createSlice({
     },
     addUser: (state, action) => {
       console.log('state', state);
-      state.user = {
+      const user = {
         firstName: '',
         lastName: '',
-        email: '',
+        email: 'test@gmail.com',
         username: action.payload.username,
         token: action.payload.token,
         name: 'Giwang',
       };
-      console.log('con2', state);
-      userToLocal(state.user);
+      console.log('con2', user);
+      userToLocal(user);
+      return {...state, user};
     },
-    logout: async () => {
-      await AsyncStorage.removeItem('user');
+    addDataUser: (state, action) => {
+      return {...state, user: action.payload};
+    },
+    logout: (state) => {
+      return {...state, user: null};
     },
   },
 });
@@ -146,5 +163,6 @@ export const {
   favouriteHotelToggle,
   addUser,
   logout,
+  addDataUser,
 } = hotelSlice.actions;
 export default hotelSlice.reducer;

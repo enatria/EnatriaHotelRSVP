@@ -1,17 +1,26 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {Profile as Profil, AppBar, CardBookHistory} from '../../components';
+import {Profile as Profil, AppBar, Button, CardBookHistory, LoginFirst} from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors} from '../../utils';
+import {useSelector} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
+  const user = useSelector(state => state.hotel.user);
   return (
     <>
       <AppBar backArrow label="Profile" />
       <View style={styles.container}>
-        <Profil />
-        <CardBookHistory/>
+        {user !== null ?
+          <>
+            <Profil />
+            <CardBookHistory/>
+          </>
+        :
+        <LoginFirst />
+        }
       </View>
     </>
   );

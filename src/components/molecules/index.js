@@ -6,6 +6,7 @@ import CardBookHistory from './CardBookHistory';
 import TopDestination from './TopDestination';
 import CardAmenities from './CardAmenities';
 import CardResultHotel from './CardResultHotel';
+import LoginFirst from './LoginFirst';
 
 export {
   AppBar,
@@ -15,4 +16,5 @@ export {
   TopDestination,
   CardAmenities,
   CardResultHotel,
+  LoginFirst,
 };

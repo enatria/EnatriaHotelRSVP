@@ -1,9 +1,22 @@
 /* eslint-disable prettier/prettier */
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import { useDispatch } from 'react-redux';
 import {Button} from '../..';
+import { logout } from '../../../redux/hotelSlice';
+
 
 const SettingsCard = () => {
+  const dispatch = useDispatch()
+  const handleLogout = async () => {
+    try {
+      dispatch(logout());
+      return await AsyncStorage.removeItem('user');
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>MY ACCOUNT</Text>
@@ -22,13 +35,13 @@ const SettingsCard = () => {
         </View>
         <View style={styles.name}>
           <Text style={styles.detailTitle}>Search History</Text>
-          <Text style={styles.detail}> > </Text>
+          <Text style={styles.detail}> &gt; </Text>
         </View>
       </View>
       <View style={styles.buttonEdit}>
         <Button title="Edit" />
       </View>
-      <Button title={'Logout'} />
+      <Button title={'Logout'} onPress={handleLogout} />
     </View>
   );
 };

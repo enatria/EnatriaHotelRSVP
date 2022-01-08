@@ -10,11 +10,15 @@ const HEADERS = {
   'x-rapidapi-key': 'bb82d1b932mshcd49e1b3f9aa8fep160d23jsnb510e97c1d7a',
 };
 
+const initialParams = {
+  currency: 'USD', locale: 'in_ID',
+};
+
 export const getDestinationId = (query = query) => {
   const options = {
     method: 'GET',
     url: URL + '/destinations/search',
-    params: {query: query, currency: 'IDR', locale: 'in_ID'},
+    params: {query: query, ...initialParams},
     headers: HEADERS,
   };
 
@@ -40,8 +44,7 @@ export const getHotels = params => {
       sort_order: 'STAR_RATING_HIGHEST_FIRST',
       destination_id: params.destination_id,
       adults_number: params.adults_number,
-      locale: 'en_US',
-      currency: 'USD',
+      ...initialParams,
       guest_rating_min: '4',
     },
     headers: HEADERS,
@@ -54,8 +57,7 @@ export const useGetDetails = params => {
   const data = {
     adults_number: params.adults_number,
     checkin_date: params.checkin_date,
-    locale: 'in_ID',
-    currency: 'IDR',
+    ...initialParams,
     hotel_id: params.hotel_id,
     checkout_date: params.checkout_date,
   };

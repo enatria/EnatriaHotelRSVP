@@ -17,14 +17,15 @@ import {
   SearchCard,
   SlideTopDestination,
 } from '../../components';
-import {getUser, removeUser} from '../../utils';
-import {useDispatch} from 'react-redux';
+import {getUser} from '../../utils';
+import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../redux/hotelSlice';
 
 const Home = ({navigation}) => {
   const [search, setSearch] = useState(undefined);
   const [label, setLabel] = useState('Home');
   const dispatch = useDispatch();
+  const user = useSelector(state => state.hotel.user);
 
   const styles = StyleSheet.create({
     reset: {
@@ -45,28 +46,13 @@ const Home = ({navigation}) => {
     },
   });
 
-  const handleLogout = async () => {
-    try {
-      return await AsyncStorage.removeItem('user');
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const checkAuth = () => {
-    if (getUser() === null) {
-      return (
-        <Button title="login" onPress={() => navigation.navigate('SignIn')} />
-      );
-    } else {
-      return <Button title="logout" onPress={handleLogout} />;
-    }
-  };
+  console.log('user :', user);
 
   return (
     <View>
       <AppBar label={label} />
-      <Button title="login" onPress={() => navigation.navigate('SignIn')} />
+      {/* <Button title="login" onPress={() => navigation.navigate('SignIn')} /> */}
+      {/* <CheckAuth/> */}
       <SafeAreaView>
         <SearchCard navigation={navigation} action={{setSearch, setLabel}} />
       </SafeAreaView>
