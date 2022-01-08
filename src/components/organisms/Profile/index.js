@@ -1,8 +1,12 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import {View, Image, StyleSheet, Text} from 'react-native';
 import ava from '../../../assets/icon/avatar.png';
 import {colors} from '../../../utils';
+import {useSelector} from 'react-redux';
 const Profile = () => {
+  const user = useSelector(state => state.hotel.user);
+  const favouriteHotel = useSelector(state => state.hotel.favourites);
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
@@ -10,8 +14,8 @@ const Profile = () => {
           <Image source={ava} style={styles.image} />
         </View>
         <View style={styles.user}>
-          <Text style={styles.userName}>Gordon Norman</Text>
-          <Text style={styles.userSocial}>@gordonnorman</Text>
+          <Text style={styles.userName}>{user.name}</Text>
+          <Text style={styles.userSocial}>@{user.username}</Text>
         </View>
       </View>
       <View style={styles.recap}>
@@ -25,7 +29,7 @@ const Profile = () => {
         </View>
         <View>
           <Text style={styles.title}>Favorites</Text>
-          <Text style={styles.num}>20</Text>
+          <Text style={styles.num}>{favouriteHotel.length}</Text>
         </View>
       </View>
     </View>

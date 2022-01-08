@@ -1,11 +1,9 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {Profile as Profil, AppBar, Button, CardBookHistory, LoginFirst} from '../../components';
-import {Rating} from 'react-native-ratings';
+import { View, StyleSheet} from 'react-native';
+import {Profile as Profil, AppBar, CardBookHistory, LoginFirst} from '../../components';
 import {colors} from '../../utils';
 import {useSelector} from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
   const user = useSelector(state => state.hotel.user);

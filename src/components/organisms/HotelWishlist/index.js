@@ -2,15 +2,21 @@
 import React from 'react';
 import {FlatList, Pressable, Text, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {CardResultHotel} from '../..';
+import { getHotelId, getImage } from '../../../redux/requiredForFetchSlice';
 
 const HotelWishlist = ({navigation}) => {
   const data = useSelector(state => state.hotel.favourites);
+  const dispatch = useDispatch()
 
   const renderItem = ({item}) => {
     return (
-      <Pressable onPress={() => navigation.navigate('Details')}>
+      <Pressable onPress={() => {
+        navigation.navigate('Details');
+        dispatch(getHotelId(item.id));
+        dispatch(getImage(item.image));
+      }}>
         <CardResultHotel
           name={item.name}
           rating={item.starRating}

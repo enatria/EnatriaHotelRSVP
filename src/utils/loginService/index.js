@@ -11,7 +11,7 @@ export const removeUser = () => {
 export const getUser = async () => {
   try {
     const user = await AsyncStorage.getItem('user');
-    return user;
+    return JSON.parse(user);
   } catch (e) {
     console.log(e);
   }
