@@ -1,7 +1,5 @@
-/* eslint-disable eslint-comments/no-unused-disable */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {
   ImageBackground,
@@ -23,26 +21,27 @@ import {
 import {Rating} from 'react-native-ratings';
 import {colors, useGetDetails} from '../../utils';
 import {useNavigation} from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 const DetailHotel = () => {
   const [data, setData] = useState(null);
+  const {checkIn, checkOut, hotelId, guest, image} = useSelector(state => state.requiredForFetch);
   // const [error, setError] = useState(null);
   // const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation();
 
   const params = {
-    adults_number: '1',
-    checkin_date: '2022-03-26',
-    hotel_id: '363464',
-    checkout_date: '2022-03-27',
+    adults_number: guest,
+    checkin_date: checkIn,
+    hotel_id: hotelId,
+    checkout_date: checkOut,
   };
 
   const {detail} = useGetDetails(params);
 
   const filteredReviews = detail?.groupReview[0];
   console.log('detail', filteredReviews);
-  const image = detail?.optimizedThumbUrls;
   console.log(image);
   return (
     <View style={styles.container}>
@@ -55,10 +54,10 @@ const DetailHotel = () => {
         />
         <Gap height={70} />
         <View style={styles.content}>
-          <Text style={styles.title}>{detail?.name}</Text>
+          <Text style={[styles.title, styles.textShadow('#000')]}>{detail?.name}</Text>
           <View style={styles.subContent}>
             <View>
-              <Text style={styles.location}>
+              <Text style={[styles.location, styles.textShadow('#000')]}>
                 {detail?.address?.cityName},{detail?.address?.countryName}
               </Text>
 
@@ -86,7 +85,7 @@ const DetailHotel = () => {
         <View>
           <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
             <SubTitle title="Overview" iya />
-            <Text style={styles.overview}>{detail?.tagline[0]}</Text>
+            <Text style={styles.overview}>{detail?.tagline[0].slice(3, -4)}</Text>
           </View>
           <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
             <SubTitle title="Amenities" />
@@ -130,11 +129,21 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    fontSize: 36,
-    lineHeight: 70,
+    fontSize: 22,
+    // lineHeight: 70,
     fontFamily: 'Poppins-SemiBold',
     fontWeight: 'bold',
   },
+  textShadow: color => ({
+    textShadowColor: color,
+    textShadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    textShadowRadius: 6.27,
+
+    elevation: 10,
+  }) ,
   subContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',

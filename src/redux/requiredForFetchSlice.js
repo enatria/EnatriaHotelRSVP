@@ -2,11 +2,13 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
+  query: null,
   destinationId: null,
   hotelId: null,
   checkIn: null,
   checkOut: null,
   guest: null,
+  image: null,
 };
 
 const requiredForFetchSlice = createSlice({
@@ -14,23 +16,53 @@ const requiredForFetchSlice = createSlice({
   initialState,
   reducers: {
     getAllState: (state, action) => action.payload,
+    getQuery: (state, action) => {
+      return {
+        ...state,
+        query: action.payload,
+      };
+    },
     getDestinationId: (state, action) => {
-      return {destinationId: action.payload};
+      return {
+        ...state,
+        destinationId: action.payload,
+      };
     },
     getHotelId: (state, action) => {
-      return {hotelId: action.payload};
+      return {
+        ...state,
+        hotelId: action.payload,
+      };
     },
     getCheckIn: (state, action) => {
-      return {checkIn: action.payload};
+      return {
+        ...state,
+        checkIn: action.payload,
+      };
     },
     getCheckOut: (state, action) => {
-      return {checkOut: action.payload};
+      return {
+        ...state,
+        checkOut: action.payload,
+      };
     },
     getGuest: (state, action) => {
-      return {guest: action.payload};
+      return {
+        ...state,
+        guest: action.payload,
+      };
+    },
+    getImage: (state, action) => {
+      const uri = action.payload.uri;
+      return {
+        ...state,
+        image: {
+          uri: uri.split('?')[0],
+        },
+      };
     },
   },
 });
 
-export const {getAllState, getDestinationId, getHotelId, getCheckIn, getCheckOut, getGuest} = requiredForFetchSlice.actions;
+export const {getAllState, getQuery, getDestinationId, getHotelId, getCheckIn, getCheckOut, getGuest, getImage} = requiredForFetchSlice.actions;
 export default requiredForFetchSlice.reducer;

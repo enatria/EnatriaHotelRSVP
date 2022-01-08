@@ -25,7 +25,7 @@ const AppBar = ({label, bg, noshadow, backArrow, hiddenStatusBar}) => {
       {hiddenStatusBar && <View style={styles.hiddenStatusBar(statusBarHeight)} />}
       <View style={noshadow ? styles.appBar(bg) : [styles.appBar(bg), styles.shadow]}>
         {backArrow && backArrowBtn}
-        <Text style={styles.text(bg)}>{label}</Text>
+        <Text style={bg === 'transparent' ? [styles.text(bg), styles.textShadow] : styles.text(bg)}>{label}</Text>
       </View>
     </>
   );
@@ -51,6 +51,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,
   }),
+  textShadow: {
+    textShadowColor: '#000',
+    textShadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    textShadowRadius: 6.27,
+
+    elevation: 10,
+  },
   shadow: {
     shadowColor: colors.primary,
     shadowOffset: {

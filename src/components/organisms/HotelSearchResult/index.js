@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import {CardResultHotel} from '../..';
 import { getHotels } from '../../../utils/apiService';
 import {useDispatch} from 'react-redux';
-import {getHotelId} from '../../../redux/requiredForFetchSlice';
+import {getHotelId, getImage} from '../../../redux/requiredForFetchSlice';
 import { addDataHotel } from '../../../redux/hotelSlice';
 
 const HotelSearchResult = ({navigation}) => {
@@ -55,6 +55,7 @@ const HotelSearchResult = ({navigation}) => {
       <Pressable onPress={() => {
         navigation.navigate('Details');
         dispatch(getHotelId(item.id));
+        dispatch(getImage(item.image));
       }}>
         <CardResultHotel
           name={item.name}

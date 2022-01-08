@@ -5,7 +5,7 @@ import {Rating} from 'react-native-ratings';
 import {colors} from '../../../utils';
 
 const CardReview = ({item}) => {
-  const date = parseInt(item?.postedOn);
+  const date = new Date(Number(item?.postedOn)).toLocaleDateString();
   return (
     <View style={styles.container}>
       <View style={styles.title}>
