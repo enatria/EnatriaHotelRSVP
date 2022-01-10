@@ -22,14 +22,11 @@ const HotelSearchResult = ({navigation}) => {
       destination_id: destinationId,
       adults_number: guest,
     };
-    // const response = getHotels(params);
-    // setHotels(response);
     const options = getHotels(params);
 
     axios
     .request(options)
     .then(function (response) {
-      console.log(response.data.searchResults.results);
       const data = response.data.searchResults.results;
       const hotel = data.map(item => {
         return {
@@ -47,8 +44,6 @@ const HotelSearchResult = ({navigation}) => {
       console.error(error);
     });
   }, [checkIn, checkOut, destinationId, guest, dispatch]);
-
-  console.log('destinationId :', destinationId);
 
   const renderItem = ({item}) => {
     return (

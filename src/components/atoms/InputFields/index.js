@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {TextInput, StyleSheet, SafeAreaView} from 'react-native';
 import DatePicker from 'react-native-date-picker';
@@ -72,18 +73,15 @@ const InputFields = ({
 };
 
 InputFields.defaultProps = {
-  // inlineIcon: 'ic_baseline',
   placeHolder: 'Placeholder',
 };
 
 export default InputFields;
 
-export const InputDatePicker = ({placeHolder}) => {
+export const InputDatePicker = ({placeHolder, action}) => {
   const [dateInit, setDateInit] = useState(new Date());
   const [value, setValue] = useState();
   const [open, setOpen] = useState(false);
-
-  console.log(value);
 
   return (
     <SafeAreaView>
@@ -104,20 +102,19 @@ export const InputDatePicker = ({placeHolder}) => {
         open={open}
         onConfirm={time => {
           setOpen(false);
-          console.log(typeof time);
 
           setDateInit(time);
 
-          const date = time.getDate();
-          const month = time.getMonth() + 1;
+          const date = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+          const month = (time.getMonth() + 1) < 10 ? '0' + (time.getMonth() + 1) : (time.getMonth() + 1);
           const year = time.getFullYear();
           const hours = time.getHours();
           const minutes = time.getMinutes();
 
           const fullDate = `${date}-${month}-${year} ${hours}:${minutes}`;
-          console.log(fullDate);
 
           setValue(fullDate);
+          action(`${year}-${month}-${date}`);
         }}
         onCancel={() => setOpen(false)}
       />

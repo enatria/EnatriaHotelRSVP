@@ -2,6 +2,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
+  search: undefined,
   query: null,
   destinationId: null,
   hotelId: null,
@@ -16,6 +17,12 @@ const requiredForFetchSlice = createSlice({
   initialState,
   reducers: {
     getAllState: (state, action) => action.payload,
+    setSearch: (state, action) => {
+      return {
+        ...state,
+        search: action.payload,
+      };
+    },
     getQuery: (state, action) => {
       return {
         ...state,
@@ -64,5 +71,5 @@ const requiredForFetchSlice = createSlice({
   },
 });
 
-export const {getAllState, getQuery, getDestinationId, getHotelId, getCheckIn, getCheckOut, getGuest, getImage} = requiredForFetchSlice.actions;
+export const {getAllState, setSearch, getQuery, getDestinationId, getHotelId, getCheckIn, getCheckOut, getGuest, getImage} = requiredForFetchSlice.actions;
 export default requiredForFetchSlice.reducer;

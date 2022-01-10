@@ -1,9 +1,12 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { Button, CardBox, InputDatePicker, InputFields } from '../..';
 import {useDispatch} from 'react-redux';
-import { getAllState, getCheckIn, getCheckOut, getDestinationId, getGuest } from '../../../redux/requiredForFetchSlice';
+import { getCheckIn, getCheckOut, getGuest } from '../../../redux/requiredForFetchSlice';
+import { addDataDestinations } from '../../../redux/destinationsSlice';
+import {getDestinations} from '../../../utils';
+import axios from 'axios';
 
 const styles = StyleSheet.create({
   row: {
@@ -21,34 +24,59 @@ const styles = StyleSheet.create({
   },
 });
 
-const SearchCard = ({navigation, action}) => {
+const SearchCard = ({ action }) => {
   const dispatch = useDispatch();
+  const [query, onChangeQuery] = useState('');
+  const [guest, onChangeGuest] = useState('');
+
+  const onChangeCheckIn = (value) => {
+    dispatch(getCheckIn(value));
+  };
+  const onChangeCheckOut = (value) => {
+    dispatch(getCheckOut(value));
+  };
+
+  console.log(query);
+
+  const searchHandle = () => {
+    action.setLabel('Search Result');
+
+    const options = getDestinations(query);
+    axios.request(options).then(res => {
+      const destinations = res.data.suggestions;
+      dispatch(addDataDestinations(destinations));
+    });
+    dispatch(getGuest(guest));
+  };
+
   return (
     <SafeAreaView style={styles.margin}>
       <CardBox shadow padding>
-        <InputFields placeHolder={'Where do you want to go?'} inlineIcon={'ic_magnifying_glass'} />
+        <InputFields
+          placeHolder={'Where do you want to go?'}
+          inlineIcon={'ic_magnifying_glass'}
+          value={query}
+          onChangeText={onChangeQuery} />
         <SafeAreaView style={styles.row}>
           <View style={styles.col05}>
-            <InputDatePicker placeHolder={'Check-in Date'} />
+            <InputDatePicker
+              placeHolder={'Check-in Date'}
+              action={onChangeCheckIn} />
           </View>
           <View style={styles.col05}>
-            <InputDatePicker placeHolder={'Check-out Date'} />
+            <InputDatePicker
+              placeHolder={'Check-out Date'}
+              action={onChangeCheckOut} />
           </View>
         </SafeAreaView>
-        <InputFields placeHolder={'Guest'} number inlineIcon={'ic_avatar'} />
+        <InputFields
+        placeHolder={'Guest'}
+        number
+        inlineIcon={'ic_avatar'}
+        value={guest}
+        onChangeText={onChangeGuest} />
         <SafeAreaView style={styles.mt10}>
-          <Button title="Search" onPress={() => {
-            action.setSearch(1);
-            action.setLabel('Search Result');
-            const payload = {
-              destinationId: '1721646',
-              hotelId: null,
-              checkIn: '2022-01-26',
-              checkOut: '2022-01-27',
-              guest: '1',
-            };
-            dispatch(getAllState(payload));
-          }} />
+          <Button title="Search" onPress={searchHandle} />
         </SafeAreaView>
       </CardBox>
     </SafeAreaView>

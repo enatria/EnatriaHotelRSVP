@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {useEffect, useState} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,21 +10,46 @@ import {
 } from 'react-native';
 import {
   AppBar,
-  Button,
   Gap,
   HotelSearchResult,
   SearchCard,
   SlideTopDestination,
 } from '../../components';
-import {getUser} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
-import {logout} from '../../redux/hotelSlice';
+import {addDataHotel} from '../../redux/hotelSlice';
+import { setSearch } from '../../redux/requiredForFetchSlice';
+import { addDataDestinations } from '../../redux/destinationsSlice';
 
 const Home = ({navigation}) => {
-  const [search, setSearch] = useState(undefined);
   const [label, setLabel] = useState('Home');
   const dispatch = useDispatch();
+
   const user = useSelector(state => state.hotel.user);
+  const destinations = useSelector(state => state.destinations);
+  const search = useSelector(state => state.requiredForFetch.search);
+
+  const staticTopDestination = [
+    {
+      destinationId: '0',
+      name: 'Jakarta',
+    },
+    {
+      destinationId: '1',
+      name: 'Bandung',
+    },
+    {
+      destinationId: '2',
+      name: 'Sukabumi',
+    },
+    {
+      destinationId: '3',
+      name: 'Bogor',
+    },
+    {
+      destinationId: '4',
+      name: 'Yogyakarta',
+    },
+  ];
 
   const styles = StyleSheet.create({
     reset: {
@@ -48,32 +72,54 @@ const Home = ({navigation}) => {
 
   console.log('user :', user);
 
+  const ResetBtn = () => (
+    <TouchableOpacity
+      style={styles.reset}
+      onPress={() => {
+        dispatch(setSearch(undefined));
+        dispatch(addDataDestinations(null));
+        dispatch(addDataHotel([]));
+        setLabel('Home');
+      }}>
+      <Text style={styles.textReset}>reset</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View>
       <AppBar label={label} />
-      {/* <Button title="login" onPress={() => navigation.navigate('SignIn')} /> */}
-      {/* <CheckAuth/> */}
       <SafeAreaView>
-        <SearchCard navigation={navigation} action={{setSearch, setLabel}} />
+        <SearchCard navigation={navigation} action={{setLabel}} />
       </SafeAreaView>
       <ScrollView>
         <SafeAreaView>
           {search !== undefined ? (
             <>
-              <TouchableOpacity
-                style={styles.reset}
-                onPress={() => {
-                  setSearch(undefined);
-                  setLabel('Home');
-                }}>
-                <Text style={styles.textReset}>reset</Text>
-              </TouchableOpacity>
+              <ResetBtn />
               <HotelSearchResult navigation={navigation} />
             </>
           ) : (
             <>
-              <SlideTopDestination label={'TOP DESTINATION'} />
-              <SlideTopDestination label={'POPULAR DESTINATION'} />
+              {destinations !== null ?
+              <>
+                <ResetBtn />
+                {destinations.map(item => {
+                  const groupLabel = item.group.replace('_', ' ');
+                  if (item.entities.length > 0) {
+                    return (
+                      <SlideTopDestination
+                        key={item.entities.destinationId}
+                        label={groupLabel}
+                        item={item.entities} />
+                    );
+                  }
+                })}
+              </>
+              :
+              <>
+                <SlideTopDestination item={staticTopDestination} label={'TOP DESTINATION'} />
+                <SlideTopDestination item={staticTopDestination} label={'POPULAR DESTINATION'} />
+              </>}
             </>
           )}
         </SafeAreaView>

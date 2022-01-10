@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {getUser} from '../';
+import destinationsSlice, { addDataDestinations } from '../../redux/destinationsSlice';
 const URL = 'https://hotels-com-provider.p.rapidapi.com/v1';
 const HEADERS = {
   'x-rapidapi-host': 'hotels-com-provider.p.rapidapi.com',
@@ -14,24 +15,13 @@ const initialParams = {
   currency: 'USD', locale: 'in_ID',
 };
 
-export const getDestinationId = (query = query) => {
-  const options = {
+export const getDestinations = (query) => {
+  return {
     method: 'GET',
     url: URL + '/destinations/search',
     params: {query: query, ...initialParams},
     headers: HEADERS,
   };
-
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data);
-      return response;
-    })
-    .catch(function (error) {
-      console.error(error);
-      return error;
-    });
 };
 
 export const getHotels = params => {
