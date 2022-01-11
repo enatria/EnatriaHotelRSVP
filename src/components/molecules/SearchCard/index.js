@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { Button, CardBox, InputDatePicker, InputFields } from '../..';
 import {useDispatch} from 'react-redux';
-import { getCheckIn, getCheckOut, getGuest } from '../../../redux/requiredForFetchSlice';
+import { getCheckIn, getCheckOut, getGuest, setSearch } from '../../../redux/requiredForFetchSlice';
 import { addDataDestinations } from '../../../redux/destinationsSlice';
 import {getDestinations} from '../../../utils';
 import axios from 'axios';
@@ -40,6 +40,7 @@ const SearchCard = ({ action }) => {
 
   const searchHandle = () => {
     action.setLabel('Search Result');
+    dispatch(setSearch(undefined));
 
     const options = getDestinations(query);
     axios.request(options).then(res => {

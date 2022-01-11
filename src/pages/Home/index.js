@@ -19,6 +19,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addDataHotel} from '../../redux/hotelSlice';
 import { setSearch } from '../../redux/requiredForFetchSlice';
 import { addDataDestinations } from '../../redux/destinationsSlice';
+import { staticTopDestination } from '../../utils';
 
 const Home = ({navigation}) => {
   const [label, setLabel] = useState('Home');
@@ -27,29 +28,6 @@ const Home = ({navigation}) => {
   const user = useSelector(state => state.hotel.user);
   const destinations = useSelector(state => state.destinations);
   const search = useSelector(state => state.requiredForFetch.search);
-
-  const staticTopDestination = [
-    {
-      destinationId: '0',
-      name: 'Jakarta',
-    },
-    {
-      destinationId: '1',
-      name: 'Bandung',
-    },
-    {
-      destinationId: '2',
-      name: 'Sukabumi',
-    },
-    {
-      destinationId: '3',
-      name: 'Bogor',
-    },
-    {
-      destinationId: '4',
-      name: 'Yogyakarta',
-    },
-  ];
 
   const styles = StyleSheet.create({
     reset: {
@@ -85,6 +63,8 @@ const Home = ({navigation}) => {
     </TouchableOpacity>
   );
 
+  const topDestinations = [...staticTopDestination].reverse();
+
   return (
     <View>
       <AppBar label={label} />
@@ -117,8 +97,8 @@ const Home = ({navigation}) => {
               </>
               :
               <>
-                <SlideTopDestination item={staticTopDestination} label={'TOP DESTINATION'} />
-                <SlideTopDestination item={staticTopDestination} label={'POPULAR DESTINATION'} />
+                <SlideTopDestination bg item={topDestinations} label={'TOP DESTINATION'} />
+                <SlideTopDestination bg item={staticTopDestination} label={'POPULAR DESTINATION'} />
               </>}
             </>
           )}

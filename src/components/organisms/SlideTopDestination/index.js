@@ -3,9 +3,9 @@ import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { getDestinationId, setSearch } from '../../../redux/requiredForFetchSlice';
-import { TopDestination } from '../../molecules';
+import { TopDestination, TopDestinationWithBg } from '../../molecules';
 
-const SlideTopDestination = ({label, item}) => {
+const SlideTopDestination = ({label, item, bg}) => {
   const styles = StyleSheet.create({
     margin: {
       marginTop: 12,
@@ -27,12 +27,18 @@ const SlideTopDestination = ({label, item}) => {
   return (
     <SafeAreaView>
       <Text style={styles.label}>{label}</Text>
-      <ScrollView horizontal style={styles.margin}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.margin}>
         {item.map(i => (
           <TouchableOpacity onPress={() => onPressHandler(i.destinationId)} key={i.destinationId}>
+            {bg ?
+            <TopDestinationWithBg
+              slide
+              name={i.name}
+              image={i.image} />
+            :
             <TopDestination
               slide
-              name={i.name} />
+              name={i.name} />}
           </TouchableOpacity>
         ))}
       </ScrollView>
