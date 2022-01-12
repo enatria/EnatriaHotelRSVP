@@ -2,7 +2,7 @@
 import React from 'react';
 import {Text, StyleSheet, View, TextInput} from 'react-native';
 
-const CardPriceSummary = () => {
+const CardPriceSummary = ({detail, guest, totalPrice}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>PRICE SUMMARY</Text>
@@ -10,11 +10,11 @@ const CardPriceSummary = () => {
         <View style={styles.titlepenginapan}>
           <Text style={styles.ket1}>3 days,</Text>
           <Text style={styles.ket1}> 1 Room,</Text>
-          <Text style={styles.ket1}> 2 Guest</Text>
+          <Text style={styles.ket1}> {guest} Guest</Text>
         </View>
         <View style={styles.titleharga}>
           <Text style={styles.ket1}>Total</Text>
-          <Text style={styles.ket1}>$ 12345</Text>
+          <Text style={styles.ket1}>$ {totalPrice}</Text>
         </View>
         <View style={styles.titleharga}>
           <Text style={styles.ket1}>Payable Now</Text>

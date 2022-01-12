@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
+import {getHotelId} from '../../redux/requiredForFetchSlice';
+
 import {
   ImageBackground,
   Text,
@@ -21,11 +23,14 @@ import {
 import {Rating} from 'react-native-ratings';
 import {colors, useGetDetails} from '../../utils';
 import {useNavigation} from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 const DetailHotel = () => {
   const [data, setData] = useState(null);
-  const {checkIn, checkOut, hotelId, guest, image} = useSelector(state => state.requiredForFetch);
+  const dispatch = useDispatch();
+  const {checkIn, checkOut, hotelId, guest, image} = useSelector(
+    state => state.requiredForFetch,
+  );
   // const [error, setError] = useState(null);
   // const [loading, setLoading] = useState(true);
 
@@ -54,7 +59,9 @@ const DetailHotel = () => {
         />
         <Gap height={70} />
         <View style={styles.content}>
-          <Text style={[styles.title, styles.textShadow('#000')]}>{detail?.name}</Text>
+          <Text style={[styles.title, styles.textShadow('#000')]}>
+            {detail?.name}
+          </Text>
           <View style={styles.subContent}>
             <View>
               <Text style={[styles.location, styles.textShadow('#000')]}>
@@ -85,7 +92,9 @@ const DetailHotel = () => {
         <View>
           <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
             <SubTitle title="Overview" iya />
-            <Text style={styles.overview}>{detail?.tagline[0].slice(3, -4)}</Text>
+            <Text style={styles.overview}>
+              {detail?.tagline[0].slice(3, -4)}
+            </Text>
           </View>
           <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
             <SubTitle title="Amenities" />
@@ -108,7 +117,10 @@ const DetailHotel = () => {
       <View style={{marginHorizontal: 20}}>
         <Button
           title="Book Hotel"
-          onPress={() => navigation.navigate('Booking')}
+          onPress={() => {
+            navigation.navigate('Booking');
+            dispatch(getHotelId(detail?.header?.hotelId));
+          }}
         />
       </View>
     </View>
@@ -143,7 +155,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 6.27,
 
     elevation: 10,
-  }) ,
+  }),
   subContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -12,6 +12,10 @@ const userToLocal = async data => {
   await AsyncStorage.setItem('user', JSON.stringify(data));
 };
 
+const bookedToLocal = async data => {
+  await AsyncStorage.setItem('booked', JSON.stringify(data));
+};
+
 const removeItem = async data => {
   await AsyncStorage.removeItem(data);
   return true;
@@ -21,6 +25,7 @@ const initialState = {
   items: [],
   user: null,
   favourites: [],
+  booked: [],
 };
 
 const hotelSlice = createSlice({
@@ -30,7 +35,9 @@ const hotelSlice = createSlice({
     addDataHotel: (state, action) => {
       let temp = [];
       action.payload.map(item => {
-        const findIndex = state.favourites.findIndex(hotel => hotel.id === item.id);
+        const findIndex = state.favourites.findIndex(
+          hotel => hotel.id === item.id,
+        );
 
         if (findIndex !== undefined && findIndex !== -1) {
           const update = {
@@ -124,15 +131,17 @@ const hotelSlice = createSlice({
       };
     },
     bookingHotel: (state, action) => {
-      let temp = [];
-      const filteredHotel = state.items.filter(
-        item => item.id === action.payload.id,
+      const index = state.favourites.findIndex(
+        itemFav => itemFav.id === action.payload.id,
       );
 
-      if (filteredHotel.length > 0) {
-        if (state.items.length > 0) {
-        }
+      if (index > 0) {
+        return state;
+      } else {
+        const tempProduct = {...action.payload};
+        state.booked.push(tempProduct);
       }
+      bookedToLocal(state.booked);
     },
     addUser: (state, action) => {
       console.log('state', state);
@@ -151,7 +160,7 @@ const hotelSlice = createSlice({
     addDataUser: (state, action) => {
       return {...state, user: action.payload};
     },
-    logout: (state) => {
+    logout: state => {
       return {...state, user: null};
     },
   },
@@ -162,6 +171,7 @@ export const {
   addDataFavourite,
   favouriteHotelToggle,
   addUser,
+  bookingHotel,
   logout,
   addDataUser,
 } = hotelSlice.actions;

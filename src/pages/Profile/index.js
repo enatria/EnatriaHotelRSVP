@@ -1,24 +1,33 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, StyleSheet} from 'react-native';
-import {Profile as Profil, AppBar, CardBookHistory, LoginFirst} from '../../components';
+import {View, StyleSheet} from 'react-native';
+import {
+  Profile as Profil,
+  AppBar,
+  CardBookHistory,
+  LoginFirst,
+} from '../../components';
 import {colors} from '../../utils';
 import {useSelector} from 'react-redux';
 
 const Profile = () => {
   const user = useSelector(state => state.hotel.user);
+
+  const booked = useSelector(state => state.hotel);
+
+  console.log('booked', booked);
   return (
     <>
       <AppBar backArrow label="Profile" />
       <View style={styles.container}>
-        {user !== null ?
+        {user !== null ? (
           <>
             <Profil />
-            <CardBookHistory/>
+            <CardBookHistory />
           </>
-        :
-        <LoginFirst />
-        }
+        ) : (
+          <LoginFirst />
+        )}
       </View>
     </>
   );
