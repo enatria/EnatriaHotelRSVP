@@ -14,8 +14,8 @@ const Profile = () => {
           <Image source={ava} style={styles.image} />
         </View>
         <View style={styles.user}>
-          <Text style={styles.userName}>{user.name}</Text>
-          <Text style={styles.userSocial}>@{user.username}</Text>
+          <Text style={styles.userName}>{user?.name}</Text>
+          <Text style={styles.userSocial}>@{user?.username}</Text>
         </View>
       </View>
       <View style={styles.recap}>

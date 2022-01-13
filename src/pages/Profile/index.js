@@ -13,7 +13,9 @@ import {useSelector} from 'react-redux';
 const Profile = () => {
   const user = useSelector(state => state.hotel.user);
 
-  const booked = useSelector(state => state.hotel);
+  const {hotelId, image} = useSelector(state => state.requiredForFetch);
+
+  const booked = useSelector(state => state.hotel.booked);
 
   console.log('booked', booked);
   return (
@@ -23,7 +25,10 @@ const Profile = () => {
         {user !== null ? (
           <>
             <Profil />
-            <CardBookHistory />
+            {booked?.map(item => {
+              console.log(item);
+              return <CardBookHistory item={item} />;
+            })}
           </>
         ) : (
           <LoginFirst />

@@ -71,5 +71,15 @@ const requiredForFetchSlice = createSlice({
   },
 });
 
-export const {getAllState, setSearch, getQuery, getDestinationId, getHotelId, getCheckIn, getCheckOut, getGuest, getImage} = requiredForFetchSlice.actions;
+export const {
+  getAllState,
+  setSearch,
+  getQuery,
+  getDestinationId,
+  getHotelId,
+  getCheckIn,
+  getCheckOut,
+  getGuest,
+  getImage,
+} = requiredForFetchSlice.actions;
 export default requiredForFetchSlice.reducer;

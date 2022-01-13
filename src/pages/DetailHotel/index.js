@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {getHotelId} from '../../redux/requiredForFetchSlice';
+import {getHotelId, getImage} from '../../redux/requiredForFetchSlice';
 
 import {
   ImageBackground,
@@ -120,6 +120,7 @@ const DetailHotel = () => {
           onPress={() => {
             navigation.navigate('Booking');
             dispatch(getHotelId(detail?.header?.hotelId));
+            dispatch(getImage(image));
           }}
         />
       </View>

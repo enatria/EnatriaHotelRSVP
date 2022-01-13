@@ -5,18 +5,18 @@ import {Gap} from '../..';
 import ava from '../../../assets/icon/avatar.png';
 import {colors} from '../../../utils';
 
-const CardBookHistory = () => {
+const CardBookHistory = ({item}) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.info}>
           <View style={styles.image}>
-            <Image source={ava} style={styles.image} />
+            <Image source={item?.photo} style={styles.image} />
           </View>
 
           <View style={styles.summary}>
-            <Text style={styles.hotel}>Garden Hotel</Text>
-            <Text style={styles.location}>San, Bruno</Text>
+            <Text style={styles.hotel}>{item?.hotel}</Text>
+            <Text style={styles.location}>{item?.location}</Text>
 
             <View style={styles.rating}>
               <Rating
@@ -33,7 +33,7 @@ const CardBookHistory = () => {
           </View>
         </View>
         <View>
-          <Text style={styles.price}>$200</Text>
+          <Text style={styles.price}>{item?.price}</Text>
         </View>
       </View>
     </View>

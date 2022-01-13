@@ -2,20 +2,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {getUser} from '../';
-import destinationsSlice, { addDataDestinations } from '../../redux/destinationsSlice';
+
 const URL = 'https://hotels-com-provider.p.rapidapi.com/v1';
 const HEADERS = {
   'x-rapidapi-host': 'hotels-com-provider.p.rapidapi.com',
-  'x-rapidapi-key': 'bb82d1b932mshcd49e1b3f9aa8fep160d23jsnb510e97c1d7a',
+  'x-rapidapi-key': '044f3a7cefmsh6560f6933d2bf3ap1084d5jsn99b6c3f4f7af',
 };
 
 const initialParams = {
-  currency: 'USD', locale: 'in_ID',
+  currency: 'USD',
+  locale: 'in_ID',
 };
 
-export const getDestinations = (query) => {
+export const getDestinations = query => {
   return {
     method: 'GET',
     url: URL + '/destinations/search',

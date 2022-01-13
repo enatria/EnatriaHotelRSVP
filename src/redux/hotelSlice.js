@@ -4,16 +4,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY as FavKey} from '../utils';
 import {transformAsync} from '@babel/core';
 
+const userKey = 'user';
+const bookKey = 'booked';
+
 const setToLocal = async data => {
   await AsyncStorage.setItem(FavKey, JSON.stringify(data));
 };
 
 const userToLocal = async data => {
-  await AsyncStorage.setItem('user', JSON.stringify(data));
+  await AsyncStorage.setItem(userKey, JSON.stringify(data));
 };
 
 const bookedToLocal = async data => {
-  await AsyncStorage.setItem('booked', JSON.stringify(data));
+  await AsyncStorage.setItem(bookKey, JSON.stringify(data));
 };
 
 const removeItem = async data => {
@@ -53,6 +56,7 @@ const hotelSlice = createSlice({
         items: temp,
         favourites: state.favourites,
         user: state.user,
+        booked: state.booked,
       };
     },
     addDataFavourite: (state, action) => {
@@ -60,6 +64,7 @@ const hotelSlice = createSlice({
         items: state.items,
         user: state.user,
         favourites: action.payload,
+        booked: state.booked,
       };
     },
     favouriteHotelToggle: (state, action) => {
@@ -128,23 +133,37 @@ const hotelSlice = createSlice({
         items: temp,
         favourites: dataFav,
         user: state.user,
+        booked: state.booked,
       };
     },
     bookingHotel: (state, action) => {
-      const index = state.favourites.findIndex(
-        itemFav => itemFav.id === action.payload.id,
+      console.log('action', action.payload);
+      console.log('booked', state.booked);
+
+      const itemIndex = state.booked.findIndex(
+        item => item.id === action.payload.id,
       );
 
-      if (index > 0) {
-        return state;
+      if (itemIndex.length >= 0) {
+        state.booked.bookQuantity = 1;
       } else {
-        const tempProduct = {...action.payload};
-        state.booked.push(tempProduct);
+        const newBook = {
+          id: action.payload.id,
+          hotel: action.payload.hotel,
+          location: action.payload.location,
+          photo: action.payload.photo,
+          price: action.payload.price,
+          rating: action.payload.rating,
+        };
+
+        console.log('temp', newBook);
+        bookedToLocal(newBook).then(() => console.log('success'));
+        state.booked.push(newBook);
+
+        console.log('booked', state.booked);
       }
-      bookedToLocal(state.booked);
     },
     addUser: (state, action) => {
-      console.log('state', state);
       const user = {
         firstName: '',
         lastName: '',

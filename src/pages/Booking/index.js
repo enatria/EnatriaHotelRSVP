@@ -11,7 +11,7 @@ import {useGetDetails} from '../../utils';
 
 const Booking = () => {
   const dispatch = useDispatch();
-  const {checkIn, checkOut, hotelId, guest} = useSelector(
+  const {checkIn, checkOut, hotelId, guest, image} = useSelector(
     state => state.requiredForFetch,
   );
 
@@ -32,10 +32,19 @@ const Booking = () => {
 
   const totalPrice = detail?.featuredPrice?.currentPrice?.plain * guest;
 
-  const handleCheckout = () => {
+  const handleCheckout = detail => {
     if (user !== null) {
       console.log(detail);
-      dispatch(bookingHotel(detail));
+      dispatch(
+        bookingHotel({
+          id: hotelId,
+          hotel: detail?.name,
+          location: detail?.address?.addressLine1,
+          photo: image,
+          price: detail?.featuredPrice?.currentPrice?.formatted,
+          rating: detail?.starRating,
+        }),
+      );
       navigation.navigate('Profile');
     } else {
       navigation.navigate('SignIn');
@@ -55,7 +64,7 @@ const Booking = () => {
             />
           </View>
           <View style={styles.button}>
-            <Button title={'Checkout'} onPress={() => handleCheckout()} />
+            <Button title={'Checkout'} onPress={() => handleCheckout(detail)} />
           </View>
         </View>
       ) : (
