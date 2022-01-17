@@ -165,12 +165,10 @@ const hotelSlice = createSlice({
     },
     addUser: (state, action) => {
       const user = {
-        firstName: '',
-        lastName: '',
-        email: 'test@gmail.com',
+        email: action.payload.email,
         username: action.payload.username,
         token: action.payload.token,
-        name: 'Giwang',
+        name: action.payload.name,
       };
       console.log('con2', user);
       userToLocal(user);

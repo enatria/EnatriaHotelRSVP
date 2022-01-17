@@ -12,6 +12,7 @@ import {
   SearchResult,
   SignIn,
   Booking,
+  EditUser,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IconNavBar from '../components/atoms/IconNavBar';
@@ -47,6 +48,11 @@ const Router = () => {
       <Stack.Screen
         name="Booking"
         component={Booking}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="EditUser"
+        component={EditUser}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

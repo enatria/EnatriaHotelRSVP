@@ -13,7 +13,7 @@ const Settings = () => {
     <View>
       <AppBar backArrow label={'Settings'} />
       {user ?
-        <SettingsCard />
+        <SettingsCard user={user}/>
       : <LoginFirst />}
     </View>
   );

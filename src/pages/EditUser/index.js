@@ -5,11 +5,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppBar, Button, CardBox, InputFields} from '../../components';
 import {colors, Login} from '../../utils';
 import {addUser} from '../../redux/hotelSlice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
-const SignIn = ({navigation}) => {
-  const [username, onChangeUsername] = useState('');
-  const [password, onChangePassword] = useState(''); 
+const EditUser = ({navigation}) => {
+  const user = useSelector(state => state.hotel.user);
+  const [username, onChangeUsername] = useState(user?.username);
+  const [name, onChangeName] = useState(user?.name);
+  const [email, onChangeEmail] = useState(user?.email);
 
   const dispatch = useDispatch();
   const styles = StyleSheet.create({
@@ -24,54 +26,45 @@ const SignIn = ({navigation}) => {
     alignCenter: {alignSelf: 'center'},
   });
 
-  const user = {username, password};
+  const data = {username, name, email};
   console.log(user);
-  const handleLogin = async () => {
-    try {
-      let res = await Login('https://fakestoreapi.com/auth/login', user);
-      console.log('data res :', res.data);
-      dispatch(addUser({username: user.username, token: res.data.token}));
-      navigation.navigate('HomeScreen');
-    } catch (e) {
-      console.log(e);
-    }
+  const handleEdit = () => {
+    dispatch(
+      addUser({name: data.name, username: data.username, email: data.email}),
+    );
+    navigation.navigate('HomeScreen');
   };
 
   return (
     <SafeAreaView>
-      <AppBar noshadow label={'Sign In'} />
+      <AppBar backArrow label={'Edit User'} />
       <View style={styles.extendBar} />
       <View style={styles.loginBar}>
         <CardBox padding center shadow height={350}>
           <SafeAreaView style={styles.widthInput}>
             <Text style={[styles.alignCenter, styles.title]}>
-              Sign in to enatria.
+              Edit My Account
             </Text>
             <View style={styles.mt12}>
               <InputFields
-                inlineIcon={'ic_avatar'}
                 value={username}
                 onChangeText={onChangeUsername}
                 placeHolder={'Username'}
               />
-            </View>
-
-            <View style={styles.mt12}>
               <InputFields
-                inlineIcon={'ic_padlock'}
-                value={password}
-                onChangeText={onChangePassword}
-                placeHolder={'Password'}
-                password
+                value={name}
+                onChangeText={onChangeName}
+                placeHolder={'Name'}
+              />
+              <InputFields
+                value={email}
+                onChangeText={onChangeEmail}
+                placeHolder={'Email'}
               />
             </View>
 
             <View style={styles.mt12}>
-              <Button title={'Sign In'} onPress={handleLogin} />
-            </View>
-
-            <View style={styles.mt12}>
-              <Text style={styles.alignCenter}>Forgot your Password?</Text>
+              <Button title={'Edit Profile'} onPress={handleEdit} />
             </View>
           </SafeAreaView>
         </CardBox>
@@ -80,4 +73,4 @@ const SignIn = ({navigation}) => {
   );
 };
 
-export default SignIn;
+export default EditUser;

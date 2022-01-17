@@ -2,13 +2,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Button} from '../..';
-import { logout } from '../../../redux/hotelSlice';
+import {logout} from '../../../redux/hotelSlice';
+import {useNavigation} from '@react-navigation/native';
 
-
-const SettingsCard = () => {
-  const dispatch = useDispatch()
+const SettingsCard = ({user}) => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const handleLogout = async () => {
     try {
       dispatch(logout());
@@ -23,23 +24,19 @@ const SettingsCard = () => {
       <View style={styles.wrapper}>
         <View style={styles.name}>
           <Text style={styles.detailTitle}>Nama</Text>
-          <Text style={styles.detail}>Zainal Abidin</Text>
+          <Text style={styles.detail}>{user?.name}</Text>
         </View>
         <View style={styles.name}>
           <Text style={styles.detailTitle}>E-mail</Text>
-          <Text style={styles.detail}>zainalabidinhsc@gmail.com</Text>
+          <Text style={styles.detail}>{user?.email}</Text>
         </View>
         <View style={styles.name}>
-          <Text style={styles.detailTitle}>Gender</Text>
-          <Text style={styles.detail}>Pria</Text>
-        </View>
-        <View style={styles.name}>
-          <Text style={styles.detailTitle}>Search History</Text>
-          <Text style={styles.detail}> &gt; </Text>
+          <Text style={styles.detailTitle}>Username</Text>
+          <Text style={styles.detail}>{user?.username}</Text>
         </View>
       </View>
       <View style={styles.buttonEdit}>
-        <Button title="Edit" />
+        <Button title="Edit" onPress={() => navigation.navigate('EditUser')} />
       </View>
       <Button title={'Logout'} onPress={handleLogout} />
     </View>

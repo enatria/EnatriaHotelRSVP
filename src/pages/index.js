@@ -8,5 +8,6 @@ import Favourites from './Favourites';
 import DetailHotel from './DetailHotel';
 import SignIn from './SignIn';
 import Booking from './Booking';
+import EditUser from './EditUser';
 
-export {Splash, Coba, Home, Profile, Settings, Favourites, DetailHotel, SignIn, Booking};
+export {Splash, Coba, Home, Profile, Settings, Favourites, DetailHotel, SignIn, Booking, EditUser};
