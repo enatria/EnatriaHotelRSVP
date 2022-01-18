@@ -99,7 +99,7 @@ const hotelSlice = createSlice({
             dataFav = [];
             dataFav.push(favouritedHotel);
           } else {
-            dataFav = [...state.favourites, favouritedHotel];
+            dataFav = [favouritedHotel, ...state.favourites];
           }
         }
       };

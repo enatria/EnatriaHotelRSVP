@@ -1,16 +1,11 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {Button, CardBox, InputDatePicker, InputFields} from '../..';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, ToastAndroid, View } from 'react-native';
+import { Button, CardBox, InputDatePicker, InputFields } from '../..';
 import {useDispatch} from 'react-redux';
-import {
-  getCheckIn,
-  getCheckOut,
-  getGuest,
-  setSearch,
-} from '../../../redux/requiredForFetchSlice';
-import {addDataDestinations} from '../../../redux/destinationsSlice';
-import {getDestinations} from '../../../utils';
+import { getCheckIn, getCheckOut, getGuest, getQuery, setSearch } from '../../../redux/requiredForFetchSlice';
+import { addDataDestinations } from '../../../redux/destinationsSlice';
+import {formValidation, getDestinations} from '../../../utils';
 import axios from 'axios';
 
 const styles = StyleSheet.create({
@@ -33,32 +28,36 @@ const SearchCard = ({action}) => {
   const dispatch = useDispatch();
   const [query, onChangeQuery] = useState('');
   const [guest, onChangeGuest] = useState('');
+  const [checkIn, setCheckIn] = useState();
+  const [checkOut, setCheckOut] = useState();
 
   const onChangeCheckIn = value => {
     dispatch(getCheckIn(value));
+    setCheckIn(value);
   };
   const onChangeCheckOut = value => {
     dispatch(getCheckOut(value));
+    setCheckOut(value);
   };
 
   console.log(query);
 
-  const searchHandle = async () => {
-    action.setLabel('Search Result');
-    dispatch(setSearch(undefined));
-
-    const options = getDestinations(query);
+  const searchHandle = () => {
     try {
-      await axios.request(options).then(res => {
-        console.log('res', res);
+      formValidation(query, checkIn, checkOut, guest);
+      action.setLabel('Search Result');
+      dispatch(setSearch(undefined));
+
+      const options = getDestinations(query);
+      axios.request(options).then(res => {
         const destinations = res.data.suggestions;
-        console.log('des', destinations);
         dispatch(addDataDestinations(destinations));
       });
+      dispatch(getGuest(guest));
+      dispatch(getQuery(query));
     } catch (e) {
-      console.log('error', e);
+      ToastAndroid.show(e.message, ToastAndroid.LONG);
     }
-    dispatch(getGuest(guest));
   };
 
   return (

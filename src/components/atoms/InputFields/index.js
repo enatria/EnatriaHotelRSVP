@@ -104,14 +104,14 @@ export const InputDatePicker = ({placeHolder, action}) => {
           setOpen(false);
 
           setDateInit(time);
+          const m = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Des'];
 
           const date = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
           const month = (time.getMonth() + 1) < 10 ? '0' + (time.getMonth() + 1) : (time.getMonth() + 1);
           const year = time.getFullYear();
-          const hours = time.getHours();
-          const minutes = time.getMinutes();
+          // const hours = time.getHours(); 
 
-          const fullDate = `${date}-${month}-${year} ${hours}:${minutes}`;
+          const fullDate = `${date} ${m[Number(month) - 1]} ${year}`;
 
           setValue(fullDate);
           action(`${year}-${month}-${date}`);

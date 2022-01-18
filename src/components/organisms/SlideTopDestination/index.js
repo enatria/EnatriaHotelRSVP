@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { getDestinationId, setSearch } from '../../../redux/requiredForFetchSlice';
+import { SafeAreaView, ScrollView, StyleSheet, Text, ToastAndroid, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDestinationId, getHotelId, setSearch } from '../../../redux/requiredForFetchSlice';
+import { formValidation } from '../../../utils';
 import { TopDestination, TopDestinationWithBg } from '../../molecules';
 
 const SlideTopDestination = ({label, item, bg}) => {
@@ -19,9 +21,23 @@ const SlideTopDestination = ({label, item, bg}) => {
   });
 
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  const {query, checkIn, checkOut, guest} = useSelector(state => state.requiredForFetch);
+
   const onPressHandler = (destinationId) => {
-    dispatch(getDestinationId(destinationId));
-    dispatch(setSearch(1));
+    try {
+      formValidation(query, checkIn, checkOut, guest);
+      dispatch(getDestinationId(destinationId));
+      dispatch(setSearch(1));
+    } catch (e) {
+      ToastAndroid.show(e.message, ToastAndroid.LONG);
+    }
+  };
+
+  const onPressHotelGroupHandler = (hotelId) => {
+    dispatch(getHotelId(hotelId));
+    navigation.navigate('Details');
   };
 
   return (
@@ -29,7 +45,13 @@ const SlideTopDestination = ({label, item, bg}) => {
       <Text style={styles.label}>{label}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.margin}>
         {item.map(i => (
-          <TouchableOpacity onPress={() => onPressHandler(i.destinationId)} key={i.destinationId}>
+          <TouchableOpacity onPress={() => {
+            if (label === 'HOTEL GROUP') {
+              onPressHotelGroupHandler(i.destinationId);
+            } else {
+              onPressHandler(i.destinationId);
+            }
+          }} key={i.destinationId}>
             {bg ?
             <TopDestinationWithBg
               slide
