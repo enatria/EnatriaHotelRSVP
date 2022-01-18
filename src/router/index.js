@@ -8,8 +8,6 @@ import {
   Profile,
   Settings,
   DetailHotel,
-  BookingHistory,
-  SearchResult,
   SignIn,
   Booking,
   EditUser,

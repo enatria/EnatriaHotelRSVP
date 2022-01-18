@@ -9,7 +9,7 @@ import {useDispatch} from 'react-redux';
 
 const SignIn = ({navigation}) => {
   const [username, onChangeUsername] = useState('');
-  const [password, onChangePassword] = useState(''); 
+  const [password, onChangePassword] = useState('');
 
   const dispatch = useDispatch();
   const styles = StyleSheet.create({

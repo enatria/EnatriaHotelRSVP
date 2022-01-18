@@ -28,9 +28,9 @@ const Booking = () => {
     checkout_date: checkOut,
   };
 
-  const {detail} = useGetDetails(params);
+  const {details} = useGetDetails(params);
 
-  const totalPrice = detail?.featuredPrice?.currentPrice?.plain * guest;
+  const totalPrice = details?.featuredPrice?.currentPrice?.plain * guest;
 
   const handleCheckout = detail => {
     if (user !== null) {
@@ -58,13 +58,13 @@ const Booking = () => {
           <View>
             <CardInformation />
             <CardPriceSummary
-              detail={detail}
+              detail={details}
               guest={guest}
               totalPrice={totalPrice}
             />
           </View>
           <View style={styles.button}>
-            <Button title={'Checkout'} onPress={() => handleCheckout(detail)} />
+            <Button title={'Checkout'} onPress={() => handleCheckout(details)} />
           </View>
         </View>
       ) : (

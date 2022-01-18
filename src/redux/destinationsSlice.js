@@ -6,7 +6,6 @@ const destinationsSlice = createSlice({
   initialState: null,
   reducers: {
     addDataDestinations: (state, action) => {
-      console.log("action", action)
       return action.payload;
     },
   },

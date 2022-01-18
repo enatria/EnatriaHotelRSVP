@@ -16,7 +16,7 @@ const CardInformation = () => {
           onChangeText={onNama}
           value={nama}
           placeholderTextColor="#acadac"
-          placeholder="zainal abidin"
+          placeholder="your name..."
           keyboardType="text"
         />
         <TextInput
@@ -24,8 +24,8 @@ const CardInformation = () => {
           onChangeText={onEmail}
           value={email}
           placeholderTextColor="#acadac"
-          placeholder="zainalabidinhsc@gmail.com"
-          keyboardType="text"
+          placeholder="ex. email@domain.com"
+          keyboardType="email-address"
         />
         <View style={styles.number_hp}>
           <TextInput

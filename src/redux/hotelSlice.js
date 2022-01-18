@@ -2,7 +2,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY as FavKey} from '../utils';
-import {transformAsync} from '@babel/core';
 
 const userKey = 'user';
 const bookKey = 'booked';
@@ -17,11 +16,6 @@ const userToLocal = async data => {
 
 const bookedToLocal = async data => {
   await AsyncStorage.setItem(bookKey, JSON.stringify(data));
-};
-
-const removeItem = async data => {
-  await AsyncStorage.removeItem(data);
-  return true;
 };
 
 const initialState = {

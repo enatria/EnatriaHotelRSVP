@@ -8,7 +8,7 @@ import { getHotelId, getImage } from '../../../redux/requiredForFetchSlice';
 
 const HotelWishlist = ({navigation}) => {
   const data = useSelector(state => state.hotel.favourites);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const renderItem = ({item}) => {
     return (

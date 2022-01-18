@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppBar, Button, CardBox, InputFields} from '../../components';
-import {colors, Login} from '../../utils';
+import {colors} from '../../utils';
 import {addUser} from '../../redux/hotelSlice';
 import {useDispatch, useSelector} from 'react-redux';
 

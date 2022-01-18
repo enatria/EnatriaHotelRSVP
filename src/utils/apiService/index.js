@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 
 const URL = 'https://hotels-com-provider.p.rapidapi.com/v1';

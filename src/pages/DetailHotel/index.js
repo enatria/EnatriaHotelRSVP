@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {getHotelId, getImage} from '../../redux/requiredForFetchSlice';
 
 import {
@@ -9,7 +9,6 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
 } from 'react-native';
 import {
   AppBar,
@@ -26,7 +25,6 @@ import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 
 const DetailHotel = () => {
-  const [data, setData] = useState(null);
   const dispatch = useDispatch();
   const {checkIn, checkOut, hotelId, guest, image} = useSelector(
     state => state.requiredForFetch,
