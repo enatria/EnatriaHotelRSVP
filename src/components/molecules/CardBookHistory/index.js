@@ -1,8 +1,7 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import {Rating} from 'react-native-ratings';
-import {Gap} from '../..';
-import ava from '../../../assets/icon/avatar.png';
 import {colors} from '../../../utils';
 
 const CardBookHistory = ({item}) => {
@@ -45,7 +44,8 @@ export default CardBookHistory;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    margin: 15,
+    marginTop: 15,
+    marginHorizontal: 15,
     border: 10,
     padding: 15,
     borderRadius: 10,
@@ -69,16 +69,16 @@ const styles = StyleSheet.create({
     height: 60,
   },
   summary: {
-    marginHorizontal: 20,
+    marginHorizontal: 12,
   },
   hotel: {
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'Poppins-SemiBold',
     color: colors.dark,
   },
   location: {
-    fontSize: 15,
-    lineHeight: 30,
+    fontSize: 11,
+    // lineHeight: 30,
     fontFamily: 'Poppins-Medium',
   },
   rating: {

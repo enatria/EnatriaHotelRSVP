@@ -13,8 +13,6 @@ import {useSelector} from 'react-redux';
 const Profile = () => {
   const user = useSelector(state => state.hotel.user);
 
-  const {hotelId, image} = useSelector(state => state.requiredForFetch);
-
   const booked = useSelector(state => state.hotel.booked);
 
   console.log('booked', booked);

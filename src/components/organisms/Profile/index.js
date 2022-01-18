@@ -6,7 +6,7 @@ import {colors} from '../../../utils';
 import {useSelector} from 'react-redux';
 const Profile = () => {
   const user = useSelector(state => state.hotel.user);
-  const favouriteHotel = useSelector(state => state.hotel.favourites);
+  const {favourites, booked} = useSelector(state => state.hotel);
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
@@ -21,7 +21,7 @@ const Profile = () => {
       <View style={styles.recap}>
         <View>
           <Text style={styles.title}>Bookings</Text>
-          <Text style={styles.num}>20</Text>
+          <Text style={styles.num}>{booked.length}</Text>
         </View>
         <View>
           <Text style={styles.title}>Reviews</Text>
@@ -29,7 +29,7 @@ const Profile = () => {
         </View>
         <View>
           <Text style={styles.title}>Favorites</Text>
-          <Text style={styles.num}>{favouriteHotel.length}</Text>
+          <Text style={styles.num}>{favourites.length}</Text>
         </View>
       </View>
     </View>
