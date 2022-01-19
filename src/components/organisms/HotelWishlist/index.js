@@ -1,21 +1,28 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {FlatList, Pressable, Text, StyleSheet} from 'react-native';
+import {FlatList, Pressable, Text, StyleSheet, ToastAndroid} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import {CardResultHotel} from '../..';
 import { getHotelId, getImage } from '../../../redux/requiredForFetchSlice';
+import { formValidation } from '../../../utils/globalFunc';
 
 const HotelWishlist = ({navigation}) => {
   const data = useSelector(state => state.hotel.favourites);
+  const {query, checkIn, checkOut, guest} = useSelector(state => state.requiredForFetch);
   const dispatch = useDispatch();
 
   const renderItem = ({item}) => {
     return (
       <Pressable onPress={() => {
-        navigation.navigate('Details');
-        dispatch(getHotelId(item.id));
-        dispatch(getImage(item.image));
+        try {
+          formValidation(query, checkIn, checkOut, guest);
+          navigation.navigate('Details');
+          dispatch(getHotelId(item.id));
+          dispatch(getImage(item.image));
+        } catch (e) {
+          ToastAndroid.show(e.message, ToastAndroid.LONG);
+        }
       }}>
         <CardResultHotel
           name={item.name}

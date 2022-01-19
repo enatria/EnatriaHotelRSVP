@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import {FlatList, Pressable} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
-import {CardResultHotel} from '../..';
+import {CardResultHotel, Loading} from '../..';
 import { getHotels } from '../../../utils/apiService';
 import {useDispatch} from 'react-redux';
 import {getHotelId, getImage} from '../../../redux/requiredForFetchSlice';
@@ -68,11 +68,13 @@ const HotelSearchResult = ({navigation}) => {
 
   return (
     <SafeAreaView>
+      {hotels === null || hotels === undefined || hotels.length < 1 ?
+      <Loading /> :
       <FlatList
         data={hotels}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-      />
+      />}
     </SafeAreaView>
   );
 };

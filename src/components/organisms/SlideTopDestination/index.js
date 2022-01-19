@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, ToastAndroid, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { addDataHotel } from '../../../redux/hotelSlice';
 import { getDestinationId, getHotelId, setSearch } from '../../../redux/requiredForFetchSlice';
 import { formValidation } from '../../../utils';
 import { TopDestination, TopDestinationWithBg } from '../../molecules';
@@ -29,6 +30,7 @@ const SlideTopDestination = ({label, item, bg}) => {
     try {
       formValidation(query, checkIn, checkOut, guest);
       dispatch(getDestinationId(destinationId));
+      dispatch(addDataHotel([]));
       dispatch(setSearch(1));
     } catch (e) {
       ToastAndroid.show(e.message, ToastAndroid.LONG);

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {getHotelId, getImage} from '../../redux/requiredForFetchSlice';
+import {getImage} from '../../redux/requiredForFetchSlice';
 
 import {
   ImageBackground,
@@ -18,6 +18,7 @@ import {
   SubTitle,
   CardAmenities,
   Button,
+  Loading,
 } from '../../components';
 import {Rating} from 'react-native-ratings';
 import {colors, useGetDetails} from '../../utils';
@@ -33,6 +34,7 @@ const DetailHotel = () => {
   // const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation();
+  console.log('hotelId :', hotelId);
 
   const params = {
     adults_number: guest,
@@ -47,82 +49,85 @@ const DetailHotel = () => {
   console.log('detail', filteredReviews);
   console.log(image);
   return (
-    <View style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <AppBar
-          backArrow
-          hiddenStatusBar
-          label={'Hotel Detail'}
-          bg="transparent"
-        />
-        <Gap height={70} />
-        <View style={styles.content}>
-          <Text style={[styles.title, styles.textShadow('#000')]}>
-            {detail?.name}
-          </Text>
-          <View style={styles.subContent}>
-            <View>
-              <Text style={[styles.location, styles.textShadow('#000')]}>
-                {detail?.address?.cityName},{detail?.address?.countryName}
-              </Text>
+    <>
+      {detail === null || detail === undefined || detail.length < 1 ?
+      <Loading center /> :
+      <View style={styles.container}>
+        <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+          <AppBar
+            backArrow
+            hiddenStatusBar
+            label={'Hotel Detail'}
+            bg="transparent"
+          />
+          <Gap height={70} />
+          <View style={styles.content}>
+            <Text style={[styles.title, styles.textShadow('#000')]}>
+              {detail?.name}
+            </Text>
+            <View style={styles.subContent}>
+              <View>
+                <Text style={[styles.location, styles.textShadow('#000')]}>
+                  {detail?.address?.cityName},{detail?.address?.countryName}
+                </Text>
 
-              <View style={styles.rating}>
-                <Rating
-                  type="custom"
-                  fractions={1}
-                  startingValue={detail?.starRating}
-                  readonly
-                  imageSize={15}
-                  tintColor="black"
-                  // onFinishRating={ratingCompleted}
-                />
+                <View style={styles.rating}>
+                  <Rating
+                    type="custom"
+                    fractions={1}
+                    startingValue={detail?.starRating}
+                    readonly
+                    imageSize={15}
+                    tintColor="black"
+                    // onFinishRating={ratingCompleted}
+                  />
+                </View>
+              </View>
+              <View style={styles.price}>
+                <Text style={styles.textPrice}>
+                  {detail?.featuredPrice?.currentPrice?.formatted}
+                </Text>
               </View>
             </View>
-            <View style={styles.price}>
-              <Text style={styles.textPrice}>
-                {detail?.featuredPrice?.currentPrice?.formatted}
+          </View>
+        </ImageBackground>
+        <ScrollView>
+          <View>
+            <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
+              <SubTitle title="Overview" iya />
+              <Text style={styles.overview}>
+                {detail?.tagline[0].slice(3, -4)}
               </Text>
             </View>
+            <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
+              <SubTitle title="Amenities" />
+              {detail?.amenities?.map(item => (
+                <CardAmenities item={item} key={item.heading} />
+              ))}
+            </View>
+            <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
+              <SubTitle title="Room Types" />
+              <ListRoomTypes room={detail?.roomTypeNames} />
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-      <ScrollView>
-        <View>
-          <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
-            <SubTitle title="Overview" iya />
-            <Text style={styles.overview}>
-              {detail?.tagline[0].slice(3, -4)}
-            </Text>
-          </View>
-          <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
-            <SubTitle title="Amenities" />
-            {detail?.amenities?.map(item => (
-              <CardAmenities item={item} key={item.heading} />
+          <View style={styles.review}>
+            <SubTitle title="Review" />
+            {filteredReviews?.reviews?.slice(0, 5).map(item => (
+              <CardReview item={item} key={item.heading} />
             ))}
           </View>
-          <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
-            <SubTitle title="Room Types" />
-            <ListRoomTypes room={detail?.roomTypeNames} />
-          </View>
+        </ScrollView>
+        <View style={{marginHorizontal: 20}}>
+          <Button
+            title="Book Hotel"
+            onPress={() => {
+              navigation.navigate('Booking');
+              dispatch(getImage(image));
+            }}
+          />
         </View>
-        <View style={styles.review}>
-          <SubTitle title="Review" />
-          {filteredReviews?.reviews?.slice(0, 5).map(item => (
-            <CardReview item={item} key={item.heading} />
-          ))}
-        </View>
-      </ScrollView>
-      <View style={{marginHorizontal: 20}}>
-        <Button
-          title="Book Hotel"
-          onPress={() => {
-            navigation.navigate('Booking');
-            dispatch(getHotelId(detail?.header?.hotelId));
-            dispatch(getImage(image));
-          }}
-        />
-      </View>
-    </View>
+      </View>}
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ import {
   AppBar,
   Gap,
   HotelSearchResult,
+  Loading,
   SearchCard,
   SlideTopDestination,
 } from '../../components';
@@ -78,12 +79,16 @@ const Home = ({navigation}) => {
               <ResetBtn />
               <HotelSearchResult navigation={navigation} />
             </>
-          ) : (
+            ) : (
             <>
               {destinations !== null ?
               <>
                 <ResetBtn />
-                {destinations.map(item => {
+                {destinations === null || destinations.length < 1 ?
+                <SafeAreaView>
+                  <Loading />
+                </SafeAreaView> :
+                destinations.map(item => {
                   const groupLabel = item.group.replace('_', ' ');
                   if (item.entities.length > 0) {
                     return (

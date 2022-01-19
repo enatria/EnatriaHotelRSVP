@@ -28,21 +28,20 @@ const Booking = () => {
     checkout_date: checkOut,
   };
 
-  const {details} = useGetDetails(params);
+  const {detail} = useGetDetails(params);
 
-  const totalPrice = details?.featuredPrice?.currentPrice?.plain * guest;
+  const totalPrice = detail?.featuredPrice?.currentPrice?.plain * guest;
 
-  const handleCheckout = detail => {
+  const handleCheckout = details => {
     if (user !== null) {
-      console.log(detail);
       dispatch(
         bookingHotel({
           id: hotelId,
-          hotel: detail?.name,
-          location: detail?.address?.addressLine1,
+          hotel: details?.name,
+          location: details?.address?.addressLine1,
           photo: image,
-          price: detail?.featuredPrice?.currentPrice?.formatted,
-          rating: detail?.starRating,
+          price: details?.featuredPrice?.currentPrice?.formatted,
+          rating: details?.starRating,
         }),
       );
       navigation.navigate('Profile');
@@ -58,13 +57,13 @@ const Booking = () => {
           <View>
             <CardInformation />
             <CardPriceSummary
-              detail={details}
+              detail={detail}
               guest={guest}
               totalPrice={totalPrice}
             />
           </View>
           <View style={styles.button}>
-            <Button title={'Checkout'} onPress={() => handleCheckout(details)} />
+            <Button title={'Checkout'} onPress={() => handleCheckout(detail)} />
           </View>
         </View>
       ) : (

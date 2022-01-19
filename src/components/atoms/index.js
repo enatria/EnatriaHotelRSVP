@@ -7,6 +7,7 @@ import CardBox from './CardBox';
 import SubTitle from './SubTitle';
 import Badge from './Badge';
 import List from './List';
+import Loading from './Loading';
 
 export {
   Button,
@@ -18,4 +19,5 @@ export {
   SubTitle,
   Badge,
   List,
+  Loading,
 };
